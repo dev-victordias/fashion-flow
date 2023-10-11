@@ -1,5 +1,8 @@
 package org.personal.app.controller;
 
+import java.util.List;
+
+import org.personal.app.model.Product;
 import org.personal.app.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-import org.personal.app.model.Product;
 
 import lombok.AllArgsConstructor;
 
@@ -33,8 +32,8 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id) {
         return productRepository.findById(id)
-            .map(record -> ResponseEntity.ok().body(record))
-            .orElse(ResponseEntity.notFound().build());
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -46,22 +45,22 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<Product> updatProduct(@PathVariable Long id, @RequestBody Product product) {
         return productRepository.findById(id)
-            .map(recordFound -> {
-                recordFound.setName(product.getName());
-                recordFound.setType(product.getType());
-                Product updated = productRepository.save(recordFound);
-                return ResponseEntity.ok().body(updated);
-            })
-            .orElse(ResponseEntity.notFound().build());
+                .map(recordFound -> {
+                    recordFound.setName(product.getName());
+                    recordFound.setType(product.getType());
+                    Product updated = productRepository.save(recordFound);
+                    return ResponseEntity.ok().body(updated);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         return productRepository.findById(id)
-            .map(recordFound -> {
-                productRepository.deleteById(id);
-                return ResponseEntity.noContent().build();
-            })
-            .orElse(ResponseEntity.notFound().build());
+                .map(recordFound -> {
+                    productRepository.deleteById(id);
+                    return ResponseEntity.noContent().build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
