@@ -1,0 +1,46 @@
+<mat-table [dataSource]="products">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+  </ng-container>
+  
+  <!-- Category Column -->
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.type }}
+      <mat-icon aria-hidden="false" aria-label="Pipe example">{{
+        element.name | type
+      }}</mat-icon>
+    </mat-cell>
+  </ng-container>
+  
+  <!-- Quantity Column -->
+  <ng-container matColumnDef="quantity">
+    <mat-header-cell *matHeaderCellDef>Quantidade</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element">{{ element.quantity }}</mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-icon-button color="accent" aria-label="Adicionar produto" (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let product" class="action-column">
+
+      <button mat-icon-button color="primary" aria-label="Editar produto" (click)="onEdit(product)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" aria-label="Remover cproduto" (click)="onDelete(product)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
