@@ -12,7 +12,10 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) {}
 
   list() {
-    return this.httpClient.get<Product[]>(this.API).pipe(first());
+    return this.httpClient.get<Product[]>(this.API)
+      .pipe(
+        first()
+      );
   }
 
   loadById(id: string) {

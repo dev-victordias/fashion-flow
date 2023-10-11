@@ -33,6 +33,7 @@ export class ProductsComponent implements OnInit {
   }
 
   refresh() {
+    console.log(this.productsService.list())
     this.products$ = this.productsService.list().pipe(
       catchError((error) => {
         this.onError('Erro ao carregar produtos.');

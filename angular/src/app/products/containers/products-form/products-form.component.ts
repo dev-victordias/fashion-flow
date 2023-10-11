@@ -14,7 +14,7 @@ import { Product } from '../../model/product';
 export class ProductFormComponent implements OnInit {
 
   form = this.formBuilder.group({
-    _id: 0,
+    _id: [''],
     name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
   });
 
