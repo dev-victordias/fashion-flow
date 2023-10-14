@@ -28,5 +28,11 @@ public class Product {
 
     @Column
     private Integer quantity;
+
+    @Column
+    private Double price;
+
+    @Column
+    private String size;
     
 }
