@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Product } from '../../model/product';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-products-list',
@@ -12,11 +13,19 @@ export class ProductsListComponent {
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
   
-  readonly displayedColumns = ['name', 'type', 'quantity', 'actions'];
+  readonly displayedColumns = ['name', 'type', 'quantity', 'size', 'price','actions'];
+  dataSource = new MatTableDataSource<Product>([]);
   
   constructor() {}
   
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['products'] && changes['products'].currentValue) {
+      // Atualize a fonte de dados quando os dados forem alterados
+      this.dataSource.data = this.products;
+    }
+  }
   
   onAdd() {
     this.add.emit(true);
@@ -28,5 +37,11 @@ export class ProductsListComponent {
 
   onDelete(product: Product) {
     this.remove.emit(product);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource.filter)
   }
 }
