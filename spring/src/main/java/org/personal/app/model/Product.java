@@ -23,8 +23,14 @@ public class Product {
     @Column(name="nome",length = 20, nullable = false)
     private String name;
 
+    @Column(name="referencia",length = 20, nullable = false)
+    private String reference;
+
     @Column(name="tipo", length = 20, nullable = false)
     private String type;
+
+    @Column(name="tamanho", length = 20)
+    private String size;
     
     @Column(name = "descricao")
     private String description;
