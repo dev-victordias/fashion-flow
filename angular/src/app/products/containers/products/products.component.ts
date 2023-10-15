@@ -9,6 +9,7 @@ import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -33,7 +34,6 @@ export class ProductsComponent implements OnInit {
   }
 
   refresh() {
-    console.log(this.productsService.list())
     this.products$ = this.productsService.list().pipe(
       catchError((error) => {
         this.onError('Erro ao carregar produtos.');
@@ -66,7 +66,7 @@ export class ProductsComponent implements OnInit {
         this.productsService.remove(product._id).subscribe(
           () => {
             this.refresh();
-            this._snackBar.open('Produtp removido com sucesso!', 'X', {
+            this._snackBar.open('Produto removido com sucesso!', 'X', {
               duration: 5000,
               verticalPosition: 'top',
               horizontalPosition: 'center'

@@ -14,7 +14,7 @@ public class FashionFlowApplication {
 		SpringApplication.run(FashionFlowApplication.class, args);
 	}
 
-	@Bean
+	/* @Bean
 	CommandLineRunner initDatabase(ProductRepository productRepository) {
 		return args -> {
 			productRepository.deleteAll();
@@ -34,6 +34,6 @@ public class FashionFlowApplication {
 			e2.setPrice(99.99);
 			productRepository.save(e2);
 		};
-	}
+	} */
 
 }

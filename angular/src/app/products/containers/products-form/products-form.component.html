@@ -1,25 +1,46 @@
 <mat-card>
     <mat-card-header>
-      <mat-toolbar color="accent"> Cursos </mat-toolbar>
+      <mat-toolbar color="accent"> Produtos </mat-toolbar>
     </mat-card-header>
   
     <mat-card-content>
       <form [formGroup]="form" class="min-width">
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nome</mat-label>
           <input matInput placeholder="Nome" formControlName="name" #name/>
-          <mat-hint align="end">{{ name.value.length || 0 }}/20</mat-hint>
           <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
         </mat-form-field>
-  
-        <mat-form-field class="full-width">
+
+        <mat-form-field class="full-width" appearance="outline">
           <mat-label>Tipo</mat-label>
-          <mat-select formControlName="type">
-            <mat-option value="null"> </mat-option>
-            <mat-option value="Front-end">Front-end</mat-option>
-            <mat-option value="Back-end">Back-end</mat-option>
-          </mat-select>
+          <input matInput placeholder="Tipo" formControlName="type" #type/>
           <mat-error *ngIf="form.get('type')?.invalid">{{ getErrorMessage("type") }}</mat-error>
         </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Preço</mat-label>
+          <input matInput placeholder="Preço" formControlName="price" #price/>
+          <mat-error *ngIf="form.get('price')?.invalid">{{ getErrorMessage("price") }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Quantidade</mat-label>
+          <input matInput placeholder="Quantidade" formControlName="quantity" #quantity/>
+          <mat-error *ngIf="form.get('quantity')?.invalid">{{ getErrorMessage("quantity") }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Tamanho</mat-label>
+          <input matInput placeholder="Tamanho" formControlName="size" #size/>
+          <mat-error *ngIf="form.get('size')?.invalid">{{ getErrorMessage("size") }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Referência</mat-label>
+          <input matInput placeholder="Referência" formControlName="reference" #reference/>
+          <mat-error *ngIf="form.get('reference')?.invalid">{{ getErrorMessage("reference") }}</mat-error>
+        </mat-form-field>
+  
       </form>
     </mat-card-content>
     <mat-card-actions align="end">

@@ -12,27 +12,27 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "produtos")
+@Table(name = "Produto")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("_id")
     private Long id;
 
-    @Column(length = 20, nullable = false)
+    @Column(name="nome",length = 20, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = false)
+    @Column(name="tipo", length = 20, nullable = false)
     private String type;
-
-    @Column
+    
+    @Column(name = "descricao")
+    private String description;
+    
+    @Column(name = "preco")
+    private Double price;
+    
+    @Column(name="quantidade")
     private Integer quantity;
 
-    @Column
-    private Double price;
-
-    @Column
-    private String size;
-    
 }

@@ -10,5 +10,5 @@ export const productResolver: ResolveFn<Observable<Product>> = (route, state, se
     return service.loadById(route.params['id']);
   }
   
-  return of({ _id: '', name: '', type: '', description: '', price: 0, quantity: 0, size: 'p' });
+  return of({ _id: '', reference: '', name: '', type: '', description: '', price: 0, quantity: 0, size: 'p' });
 };

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, UntypedFormGroup, Validators, NonNullableFormBuilder } from '@angular/forms';
-import { ProductsService } from '../../services/products.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../model/product';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-form',
@@ -12,10 +12,14 @@ import { Product } from '../../model/product';
   styleUrls: ['./products-form.component.scss'],
 })
 export class ProductFormComponent implements OnInit {
-
   form = this.formBuilder.group({
     _id: [''],
-    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    name: ['', [Validators.required]],
+    type: ['', [Validators.required]],
+    price: [0, [Validators.required]],
+    size: ['', [Validators.required]],
+    reference: ['', [Validators.required]],
+    quantity: [0, [Validators.required]],
   });
 
   constructor(
@@ -23,53 +27,65 @@ export class ProductFormComponent implements OnInit {
     private service: ProductsService,
     private _snackBar: MatSnackBar,
     private location: Location,
-    private route: ActivatedRoute ) {
-
-    }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     const product: Product = this.route.snapshot.data['product'];
     this.form.setValue({
       _id: product._id,
-      name: product.name
+      name: product.name,
+      type: product.type,
+      size: product.size,
+      reference: product.reference,
+      quantity: product.quantity,
+      price: product.price,
     });
   }
 
   onSubmit() {
-    this.service.save(this.form.value).subscribe(
-      (result) => this.onSuccess(),
-      (error) => this.onError()
-    );
+    if (this.form.valid) {
+      this.service.save(this.form.value).subscribe(
+        (result) => this.onSuccess(),
+        (error) => this.onError('Erro na conexão com o banco de dados!')
+      );
+    } else {
+      this.onError('Preencha todos os campos com valores válidos!');
+    }
   }
 
   onCancel() {
     this.location.back();
   }
-  
+
   private onSuccess() {
-    this._snackBar.open('Produto salvo com sucesso!', '', {duration: 3000});
+    this._snackBar.open('Produto salvo com sucesso!', '', { duration: 3000 });
     this.location.back();
   }
 
-  private onError() {
-    this._snackBar.open('Erro ao salvar produto!', '', {duration: 3000});
+  private onError(message: string) {
+    this._snackBar.open(message, '', { duration: 3000 });
   }
 
   getErrorMessage(fieldName: string) {
-    	const field = this.form.get(fieldName);
-      if(field?.hasError('required')) {
-        return 'Campo obrigatório!'
-      }
-
-      if(field?.hasError('minlength')) {
-        const requiredLength = field.errors ? field.errors['minlength']['requiredLength'] : 5;
-        return `Tamanho mínimo precisa ser de ${requiredLength} caracteres`;
-      }
-
-      if(field?.hasError('maxlength')) {
-        const requiredLength = field.errors ? field.errors['maxlength']['requiredLength'] : 20;
-        return `Tamanho máximo de ${requiredLength} caracteres excedido`;
-      }
-      return 'Campo inválido!'
+    const field = this.form.get(fieldName);
+    if (field?.hasError('required')) {
+      return 'Campo obrigatório!';
     }
+
+    if (field?.hasError('minlength')) {
+      const requiredLength = field.errors
+        ? field.errors['minlength']['requiredLength']
+        : 5;
+      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres`;
+    }
+
+    if (field?.hasError('maxlength')) {
+      const requiredLength = field.errors
+        ? field.errors['maxlength']['requiredLength']
+        : 20;
+      return `Tamanho máximo de ${requiredLength} caracteres excedido`;
+    }
+    return 'Campo inválido!';
+  }
 }

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { Product } from '../../model/product';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Product } from '../../model/product';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-products-list',
@@ -12,25 +13,34 @@ export class ProductsListComponent {
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
-  
-  readonly displayedColumns = ['name', 'type', 'quantity', 'size', 'price','actions'];
-  dataSource = new MatTableDataSource<Product>([]);
-  
-  constructor() {}
-  
-  ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['products'] && changes['products'].currentValue) {
-      // Atualize a fonte de dados quando os dados forem alterados
-      this.dataSource.data = this.products;
-    }
+  readonly displayedColumns = [
+    'reference',
+    'name',
+    'type',
+    'quantity',
+    'size',
+    'price',
+    'actions',
+  ];
+  dataSource = new MatTableDataSource<Product>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+  ngOnInit() {
+    this.dataSource.data = this.products;
   }
-  
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+
   onAdd() {
     this.add.emit(true);
   }
-  
+
   onEdit(product: Product) {
     this.edit.emit(product);
   }
@@ -39,9 +49,13 @@ export class ProductsListComponent {
     this.remove.emit(product);
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource.filter)
+  applyFilter(input: HTMLInputElement) {
+    const filterValue = input.value;
+    this.dataSource.filter = filterValue;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
   }
 }
