@@ -7,7 +7,7 @@ import { Product } from '../model/product';
   providedIn: 'root',
 })
 export class ProductsService {
-  private readonly API = 'api/products';
+  private readonly API = 'https://app-urdina.wittymoss-0f7d6190.centralus.azurecontainerapps.io/api/products';
 
   constructor(private httpClient: HttpClient) {}
 
