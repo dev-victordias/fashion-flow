@@ -6,6 +6,7 @@ import org.personal.app.model.Product;
 import org.personal.app.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,11 +25,13 @@ import lombok.AllArgsConstructor;
 public class ProductController {
     private final ProductRepository productRepository;
 
+    @CrossOrigin(origins = "https://brave-smoke-0c81a9f10.3.azurestaticapps.net/")
     @GetMapping
     public List<Product> listProducts() {
         return productRepository.findAll();
     }
 
+    @CrossOrigin(origins = "https://brave-smoke-0c81a9f10.3.azurestaticapps.net/")
     @GetMapping("/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id) {
         return productRepository.findById(id)
@@ -36,12 +39,14 @@ public class ProductController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin(origins = "https://brave-smoke-0c81a9f10.3.azurestaticapps.net/")
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Product createProduct(@RequestBody Product product) {
         return productRepository.save(product);
     }
 
+    @CrossOrigin(origins = "https://brave-smoke-0c81a9f10.3.azurestaticapps.net/")
     @PutMapping("/{id}")
     public ResponseEntity<Product> updatProduct(@PathVariable Long id, @RequestBody Product product) {
         return productRepository.findById(id)
@@ -54,6 +59,7 @@ public class ProductController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin(origins = "https://brave-smoke-0c81a9f10.3.azurestaticapps.net/")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         return productRepository.findById(id)
