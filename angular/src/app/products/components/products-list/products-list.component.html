@@ -46,14 +46,7 @@
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell class="action-column" *matHeaderCellDef>
-      <button
-        mat-icon-button
-        color="accent"
-        aria-label="Adicionar produto"
-        (click)="onAdd()"
-      >
-        <mat-icon>add_circle</mat-icon>
-      </button>
+      <button mat-raised-button color="primary" (click)="onAdd()">Cadastrar</button>
     </th>
     <td mat-cell class="action-column" *matCellDef="let product">
       <button mat-icon-button disabled aria-label="Ver detalhes">

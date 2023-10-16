@@ -11,15 +11,23 @@ export class AppComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  navigateToListProducts() {
-    this.router.navigate(['products'], { relativeTo: this.route });
-  }
-
-  navigateToAddProducts() {
-    this.router.navigate(['products/new'], { relativeTo: this.route });
-  }
-
-  navigateToHome() {
-    this.router.navigate(['/']);
+  onTabSelected(event: any) {
+    console.log(event);
+    switch (event.index) {
+      case 0:
+        this.router.navigate(['/'], { relativeTo: this.route });
+        break;
+      case 1:
+        this.router.navigate(['/'], { relativeTo: this.route });
+        break;
+      case 2:
+        this.router.navigate(['/products'], { relativeTo: this.route });
+        break;
+      case 3:
+        this.router.navigate(['/'], { relativeTo: this.route });
+        break;
+      default:
+        break;
+    }
   }
 }

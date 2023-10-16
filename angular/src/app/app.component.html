@@ -6,7 +6,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="onTabSelected($event)">
   <mat-tab label="Dashboard"> Dashboard </mat-tab>
   <mat-tab label="Vendas"> Vendas </mat-tab>
   <mat-tab label="Estoque"> <router-outlet></router-outlet> </mat-tab>
