@@ -22,6 +22,23 @@ export class ProductFormComponent implements OnInit {
     quantity: [0, [Validators.required]],
   });
 
+  typeOptions = [
+    { value: 'Vestido', viewValue: 'Vestido' },
+    { value: 'Calça', viewValue: 'Calça' },
+    { value: 'Blusa', viewValue: 'Blusa' },
+    // Adicione mais opções conforme necessário
+  ];
+
+  sizeOptions = [
+    { value: 'PP', viewValue: 'PP' },
+    { value: 'P', viewValue: 'P' },
+    { value: 'M', viewValue: 'M' },
+    { value: 'G', viewValue: 'G' },
+    { value: 'GG', viewValue: 'GG' },
+    { value: 'G1', viewValue: 'G1' },
+    { value: 'G2', viewValue: 'G2' },
+  ];
+
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private service: ProductsService,
