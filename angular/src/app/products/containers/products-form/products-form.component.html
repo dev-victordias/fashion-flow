@@ -13,7 +13,11 @@
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Tipo</mat-label>
-          <input matInput placeholder="Tipo" formControlName="type" #type/>
+          <mat-select placeholder="Selecione um tipo" formControlName="type" #type>
+            <mat-option *ngFor="let option of typeOptions" [value]="option.value">
+              {{ option.viewValue }}
+            </mat-option>
+          </mat-select>
           <mat-error *ngIf="form.get('type')?.invalid">{{ getErrorMessage("type") }}</mat-error>
         </mat-form-field>
 
@@ -31,7 +35,11 @@
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Tamanho</mat-label>
-          <input matInput placeholder="Tamanho" formControlName="size" #size/>
+          <mat-select placeholder="Selecione um tipo" formControlName="size" #size>
+            <mat-option *ngFor="let option of sizeOptions" [value]="option.value">
+              {{ option.viewValue }}
+            </mat-option>
+          </mat-select>
           <mat-error *ngIf="form.get('size')?.invalid">{{ getErrorMessage("size") }}</mat-error>
         </mat-form-field>
 
