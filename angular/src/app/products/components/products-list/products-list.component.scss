@@ -3,6 +3,7 @@
     max-height: 600px;
 }
 
-.action-column {
-    justify-content: center;
+td.mat-cell, th.mat-header-cell {
+    text-align: center;
+    justify-content:center;
 }
