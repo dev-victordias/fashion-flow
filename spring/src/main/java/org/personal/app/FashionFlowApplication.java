@@ -14,12 +14,13 @@ public class FashionFlowApplication {
 		SpringApplication.run(FashionFlowApplication.class, args);
 	}
 
-	/* @Bean
+	@Bean
 	CommandLineRunner initDatabase(ProductRepository productRepository) {
 		return args -> {
 			productRepository.deleteAll();
 			Product e = new Product();
 			e.setName("Sara");
+			e.setReference("abc123");
 			e.setType("Vestido");
 			e.setSize("M");
 			e.setQuantity(10);
@@ -28,12 +29,13 @@ public class FashionFlowApplication {
 			
 			Product e2 = new Product();
 			e2.setName("Karol");
+			e2.setReference("def456");
 			e2.setType("Calça");
 			e2.setSize("M");
 			e2.setQuantity(15);
 			e2.setPrice(99.99);
 			productRepository.save(e2);
 		};
-	} */
+	}
 
 }
