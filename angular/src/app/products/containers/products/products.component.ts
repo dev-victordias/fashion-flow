@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
 
 
 @Component({
@@ -54,6 +55,13 @@ export class ProductsComponent implements OnInit {
 
   onEdit(product: Product) {
     this.router.navigate(['edit', product._id], { relativeTo: this.route });
+  }
+
+  onView(product: Product) {
+    this.dialog.open(ViewDialogComponent, {
+      width: '600px',
+      data: product,
+    });
   }
 
   onRemove(product: Product) {

@@ -12,6 +12,7 @@ export class ProductsListComponent {
   @Input() products: Product[] = [];
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
+  @Output() view = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
 
   readonly displayedColumns = [
@@ -43,6 +44,10 @@ export class ProductsListComponent {
 
   onEdit(product: Product) {
     this.edit.emit(product);
+  }
+
+  onView(product: Product) {
+    this.view.emit(product);
   }
 
   onDelete(product: Product) {
