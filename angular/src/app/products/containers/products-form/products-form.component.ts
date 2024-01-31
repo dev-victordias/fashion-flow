@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { Observer } from 'rxjs';
 import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
 
@@ -43,12 +43,12 @@ export class ProductFormComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private service: ProductsService,
     private _snackBar: MatSnackBar,
-    private location: Location,
-    private route: ActivatedRoute
-  ) {}
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: Product // Injete os dados do produto  
+  ) { }
 
   ngOnInit(): void {
-    const product: Product = this.route.snapshot.data['product'];
+    const product: Product = this.data;
     this.form.setValue({
       _id: product._id,
       name: product.name,
@@ -62,27 +62,29 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.service.save(this.form.value).subscribe(
-        (result) => this.onSuccess(),
-        (error) => this.onError('Erro na conexão com o banco de dados!')
-      );
-    } else {
-      this.onError('Preencha todos os campos com valores válidos!');
+      this.service.save(this.form.value).subscribe(this.observer)
     }
   }
 
   onCancel() {
-    this.location.back();
+    this.dialog.closeAll();
   }
 
   private onSuccess() {
     this._snackBar.open('Produto salvo com sucesso!', '', { duration: 3000 });
-    this.location.back();
+    this.dialog.closeAll();
   }
 
   private onError(message: string) {
     this._snackBar.open(message, '', { duration: 3000 });
   }
+
+  observer: Observer<any> = {
+    next: () => this.onSuccess(),
+    error: () => this.onError('Erro na conexão com o banco de dados!'),
+    complete: () => {/* optional complete handling */ }
+  };
+
 
   getErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);

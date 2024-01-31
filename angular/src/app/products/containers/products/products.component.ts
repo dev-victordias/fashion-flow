@@ -9,6 +9,7 @@ import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
+import { ProductFormComponent } from '../products-form/products-form.component';
 
 
 @Component({
@@ -50,11 +51,16 @@ export class ProductsComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.dialog.open(ProductFormComponent, {
+      width: '600px',
+    });
   }
 
   onEdit(product: Product) {
-    this.router.navigate(['edit', product._id], { relativeTo: this.route });
+    this.dialog.open(ProductFormComponent, {
+      width: '600px',
+      data: product,
+    });
   }
 
   onView(product: Product) {
