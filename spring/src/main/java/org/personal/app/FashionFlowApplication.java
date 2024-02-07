@@ -35,6 +35,33 @@ public class FashionFlowApplication {
 			e2.setQuantity(15);
 			e2.setPrice(99.99);
 			productRepository.save(e2);
+
+			Product e3 = new Product();
+			e3.setName("Julia");
+			e3.setReference("ghi678");
+			e3.setType("Vestido");
+			e3.setSize("M");
+			e3.setQuantity(20);
+			e3.setPrice(129.0);
+			productRepository.save(e3);
+
+			Product e4 = new Product();
+			e4.setName("Maria");
+			e4.setReference("jkl910");
+			e4.setType("Conjunto");
+			e4.setSize("G");
+			e4.setQuantity(5);
+			e4.setPrice(99.99);
+			productRepository.save(e4);
+
+			Product e5 = new Product();
+			e5.setName("Gabriela");
+			e5.setReference("mno111");
+			e5.setType("Blazer");
+			e5.setSize("P");
+			e5.setQuantity(12);
+			e5.setPrice(199.99);
+			productRepository.save(e5);
 		};
 	}
 

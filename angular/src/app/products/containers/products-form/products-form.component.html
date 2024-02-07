@@ -3,7 +3,7 @@
 </h2>
 
 <div mat-dialog-content>
-  <form [formGroup]="form" class="min-width">
+  <form [formGroup]="form" class="example-form">
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Nome</mat-label>
       <input matInput placeholder="Nome" formControlName="name" #name />
@@ -22,7 +22,8 @@
 
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Preço</mat-label>
-      <input matInput placeholder="Preço" formControlName="price" #price />
+      <input matInput placeholder="Preço" formControlName="price" #price (blur)="formatPrice()"/>
+      <span matTextPrefix>R$&nbsp;</span>
       <mat-error *ngIf="form.get('price')?.invalid">{{ getErrorMessage("price") }}</mat-error>
     </mat-form-field>
 

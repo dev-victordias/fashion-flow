@@ -26,6 +26,8 @@ export class ProductFormComponent implements OnInit {
     { value: 'Vestido', viewValue: 'Vestido' },
     { value: 'Calça', viewValue: 'Calça' },
     { value: 'Blusa', viewValue: 'Blusa' },
+    { value: 'Blazer', viewValue: 'Blazer' },
+    { value: 'Conjunto', viewValue: 'Conjunto' },
     // Adicione mais opções conforme necessário
   ];
 
@@ -59,6 +61,7 @@ export class ProductFormComponent implements OnInit {
       price: product.price,
     });
   }
+
 
   onSubmit() {
     if (this.form.valid) {
@@ -107,4 +110,12 @@ export class ProductFormComponent implements OnInit {
     }
     return 'Campo inválido!';
   }
+
+  formatPrice() {
+  let value = this.form.get('price')?.value;
+  if (value !== undefined) {
+    const formattedValue = (parseFloat(value.toString()) / 100).toFixed(2);
+    this.form.get('price')?.setValue(parseFloat(formattedValue), { emitEvent: false });
+  }
+}
 }

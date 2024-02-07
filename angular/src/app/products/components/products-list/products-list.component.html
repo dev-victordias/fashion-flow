@@ -5,6 +5,7 @@
     <mat-icon>search</mat-icon>
   </button>
 </mat-form-field>
+<button mat-raised-button color="primary" (click)="onAdd()">Cadastrar</button>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Name Column -->
@@ -45,9 +46,7 @@
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell class="action-column" *matHeaderCellDef>
-      <button mat-raised-button color="primary" (click)="onAdd()">Cadastrar</button>
-    </th>
+    <th mat-header-cell class="action-column" *matHeaderCellDef>Ações</th>
     <td mat-cell class="action-column" *matCellDef="let product">
       <button mat-icon-button color="basic" aria-label="Ver detalhes" (click)="onView(product)">
         <mat-icon>info</mat-icon>
@@ -55,8 +54,11 @@
       <button mat-icon-button color="primary" aria-label="Editar produto" (click)="onEdit(product)">
         <mat-icon>edit_square</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Remover cproduto" (click)="onDelete(product)">
+      <button mat-icon-button color="warn" aria-label="Remover produto" (click)="onDelete(product)">
         <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Editar estoque">
+        <mat-icon>inventory</mat-icon>
       </button>
     </td>
   </ng-container>

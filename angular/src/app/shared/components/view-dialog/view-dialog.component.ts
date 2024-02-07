@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, Output, EventEmitter } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/products/model/product';
 
 @Component({
@@ -8,11 +8,17 @@ import { Product } from 'src/app/products/model/product';
   styleUrls: ['./view-dialog.component.scss']
 })
 export class ViewDialogComponent {
+  @Output() editClicked = new EventEmitter<Product>();
+
   constructor(
     public dialogRef: MatDialogRef<ViewDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Product,
-  ) { 
-    console.log(data)
+    public dialog: MatDialog,
+  ) { }
+
+  onEdit(product: Product) {
+    this.editClicked.emit(product);
+    this.dialogRef.close();
   }
 
   onConfirm(result: boolean): void {

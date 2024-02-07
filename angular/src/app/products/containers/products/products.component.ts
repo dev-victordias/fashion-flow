@@ -64,7 +64,19 @@ export class ProductsComponent implements OnInit {
   }
 
   onView(product: Product) {
-    this.dialog.open(ViewDialogComponent, {
+    const dialogRef = this.dialog.open(ViewDialogComponent, {
+      width: '600px',
+      data: product,
+    });
+  
+    dialogRef.componentInstance.editClicked.subscribe((editedProduct: Product) => {
+      dialogRef.close();
+      this.openEditDialog(editedProduct);
+    });
+  }
+  
+  openEditDialog(product: Product) {
+    this.dialog.open(ProductFormComponent, {
       width: '600px',
       data: product,
     });
