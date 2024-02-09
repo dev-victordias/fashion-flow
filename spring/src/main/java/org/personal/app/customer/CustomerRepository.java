@@ -1,5 +1,9 @@
-package main.java.org.personal.app.customer;
+package org.personal.app.customer;
 
-public class CustomerRepository extends JpaRepository<Customer, Long>{
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, Long>{
     
 }

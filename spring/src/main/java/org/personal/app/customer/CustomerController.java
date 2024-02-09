@@ -1,4 +1,4 @@
-package main.java.org.personal.app.customer;
+package org.personal.app.customer;
 
 public class CustomerController {
     

@@ -1,4 +1,4 @@
-package main.java.org.personal.app.product;
+package org.personal.app.product;
 
 public class ProductService {
     

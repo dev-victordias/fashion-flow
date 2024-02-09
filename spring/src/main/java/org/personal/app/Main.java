@@ -1,11 +1,12 @@
 package org.personal.app;
 
-import org.personal.app.model.Product;
-import org.personal.app.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import org.personal.app.product.Product;
+import org.personal.app.product.ProductRepository;
 
 @SpringBootApplication
 public class Main {
