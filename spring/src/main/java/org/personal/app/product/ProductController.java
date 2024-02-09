@@ -1,4 +1,4 @@
-package org.personal.app.controller;
+package main.java.org.personal.app.product;
 
 import java.util.List;
 

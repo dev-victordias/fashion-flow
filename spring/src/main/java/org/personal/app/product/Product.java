@@ -1,4 +1,4 @@
-package org.personal.app.model;
+package main.java.org.personal.app.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
