@@ -9,7 +9,7 @@ import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
-import { ProductFormComponent } from '../products-form/products-form.component';
+import { ProductNewComponent } from '../products-new/products-new.component';
 
 
 @Component({
@@ -51,13 +51,13 @@ export class ProductsComponent implements OnInit {
   }
 
   onAdd() {
-    this.dialog.open(ProductFormComponent, {
+    this.dialog.open(ProductNewComponent, {
       width: '600px',
     });
   }
 
   onEdit(product: Product) {
-    this.dialog.open(ProductFormComponent, {
+    this.dialog.open(ProductNewComponent, {
       width: '600px',
       data: product,
     });
@@ -76,7 +76,7 @@ export class ProductsComponent implements OnInit {
   }
   
   openEditDialog(product: Product) {
-    this.dialog.open(ProductFormComponent, {
+    this.dialog.open(ProductNewComponent, {
       width: '600px',
       data: product,
     });

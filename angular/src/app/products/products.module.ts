@@ -5,12 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ProductsListComponent } from './components/products-list/products-list.component';
-import { ProductFormComponent } from './containers/products-form/products-form.component';
-import { ProductsComponent } from './containers/products/products.component';
+import { ProductNewComponent } from './components/products-new/products-new.component';
+import { ProductsComponent } from './components/products/products.component';
 import { ProductsRoutingModule } from './products-routing.module';
 
 @NgModule({
-  declarations: [ProductsComponent, ProductFormComponent, ProductsListComponent],
+  declarations: [ProductsComponent, ProductNewComponent, ProductsListComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

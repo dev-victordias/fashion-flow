@@ -8,10 +8,10 @@ import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-form',
-  templateUrl: './products-form.component.html',
-  styleUrls: ['./products-form.component.scss'],
+  templateUrl: './products-new.component.html',
+  styleUrls: ['./products-new.component.scss'],
 })
-export class ProductFormComponent implements OnInit {
+export class ProductNewComponent implements OnInit {
   form = this.formBuilder.group({
     _id: [''],
     name: ['', [Validators.required]],

@@ -7,7 +7,7 @@ import { Product } from '../model/product';
   providedIn: 'root',
 })
 export class ProductsService {
-  private readonly API = 'api/products';
+  private readonly API = 'api/v1/products';
 
   constructor(private httpClient: HttpClient) {}
 
