@@ -11,7 +11,7 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Tipo</mat-label>
+      <mat-label>Categoria</mat-label>
       <mat-select placeholder="Selecione um tipo" formControlName="type" #type>
         <mat-option *ngFor="let option of typeOptions" [value]="option.value">
           {{ option.viewValue }}

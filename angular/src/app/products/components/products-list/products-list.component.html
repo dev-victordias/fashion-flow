@@ -9,45 +9,45 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Reference Column -->
-  <ng-container matColumnDef="reference">
-    <th mat-header-cell *matHeaderCellDef>Referência</th>
-    <td mat-cell *matCellDef="let element">{{ element.reference }}</td>
-  </ng-container>
+<ng-container matColumnDef="reference">
+  <th mat-header-cell class="center-content" *matHeaderCellDef>Referência</th>
+  <td mat-cell class="center-content" *matCellDef="let element">{{ element.reference }}</td>
+</ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Nome</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+<!-- Name Column -->
+<ng-container matColumnDef="name">
+  <th mat-header-cell class="center-content" *matHeaderCellDef>Nome</th>
+  <td mat-cell class="center-content" *matCellDef="let element">{{ element.name }}</td>
+</ng-container>
 
-  <!-- Type Column -->
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef>Categoria</th>
-    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
-  </ng-container>
+<!-- Type Column -->
+<ng-container matColumnDef="type">
+  <th mat-header-cell class="center-content" *matHeaderCellDef>Categoria</th>
+  <td mat-cell class="center-content" *matCellDef="let element">{{ element.type }}</td>
+</ng-container>
 
-  <!-- Quantity Column -->
-  <ng-container matColumnDef="quantity">
-    <th mat-header-cell *matHeaderCellDef>Estoque</th>
-    <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-  </ng-container>
+<!-- Quantity Column -->
+<ng-container matColumnDef="quantity">
+  <th mat-header-cell class="center-content" *matHeaderCellDef>Estoque</th>
+  <td mat-cell class="center-content" *matCellDef="let element">{{ element.quantity }}</td>
+</ng-container>
 
-  <!-- Size Column -->
-  <ng-container matColumnDef="size">
-    <th mat-header-cell *matHeaderCellDef>Tamanho</th>
-    <td mat-cell *matCellDef="let element">{{ element.size }}</td>
-  </ng-container>
+<!-- Size Column -->
+<ng-container matColumnDef="size">
+  <th mat-header-cell class="center-content" *matHeaderCellDef>Tamanho</th>
+  <td mat-cell class="center-content" *matCellDef="let element">{{ element.size }}</td>
+</ng-container>
 
-  <!-- Price Column -->
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef>Preço</th>
-    <td mat-cell *matCellDef="let element">R${{ element.price }}</td>
-  </ng-container>
+<!-- Price Column -->
+<ng-container matColumnDef="price">
+  <th mat-header-cell class="center-content" *matHeaderCellDef>Preço</th>
+  <td mat-cell class="center-content" *matCellDef="let element">R${{ element.price }}</td>
+</ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell class="action-column" *matHeaderCellDef>Ações</th>
-    <td mat-cell class="action-column" *matCellDef="let product">
+    <th mat-header-cell class="center-content action-column" *matHeaderCellDef>Ações</th>
+    <td mat-cell class="center-content action-column" *matCellDef="let product">
       <button mat-icon-button color="basic" aria-label="Ver detalhes" (click)="onView(product)">
         <mat-icon>info</mat-icon>
       </button>
