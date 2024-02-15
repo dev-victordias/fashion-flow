@@ -10,6 +10,7 @@ import { ProductsService } from '../../services/products.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
 import { ProductNewComponent } from '../products-new/products-new.component';
+import { ProductEditComponent } from '../products-edit/products-edit.component';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class ProductsComponent implements OnInit {
     this.products$ = this.productsService.list().pipe(
       catchError((error) => {
         this.onError('Erro ao carregar produtos.');
+        console.log(error);
         return of([]);
       })
     );
@@ -57,10 +59,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onEdit(product: Product) {
-    this.dialog.open(ProductNewComponent, {
-      width: '600px',
-      data: product,
-    });
+    this.openEditDialog(product);
   }
 
   onView(product: Product) {
@@ -68,18 +67,23 @@ export class ProductsComponent implements OnInit {
       width: '600px',
       data: product,
     });
-  
+
     dialogRef.componentInstance.editClicked.subscribe((editedProduct: Product) => {
       dialogRef.close();
       this.openEditDialog(editedProduct);
     });
   }
-  
+
   openEditDialog(product: Product) {
-    this.dialog.open(ProductNewComponent, {
+    const dialogRef = this.dialog.open(ProductEditComponent, {
       width: '600px',
       data: product,
     });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if(result) {
+        this.refresh();
+      }
+    })
   }
 
   onRemove(product: Product) {
