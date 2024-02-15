@@ -46,6 +46,8 @@ public class ProductController {
                 .map(recordFound -> {
                     recordFound.setName(product.getName());
                     recordFound.setType(product.getType());
+                    recordFound.setPrice(product.getPrice());
+                    recordFound.setQuantity(product.getQuantity());
                     Product updated = productRepository.save(recordFound);
                     return ResponseEntity.ok().body(updated);
                 })
