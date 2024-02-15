@@ -41,7 +41,7 @@
 <!-- Price Column -->
 <ng-container matColumnDef="price">
   <th mat-header-cell class="center-content" *matHeaderCellDef>Preço</th>
-  <td mat-cell class="center-content" *matCellDef="let element">R${{ element.price }}</td>
+  <td mat-cell class="center-content" *matCellDef="let element">{{ element.price | currency:'BRL':'symbol':'1.2-2' }}</td>
 </ng-container>
 
   <!-- Actions Column -->

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observer } from 'rxjs';
 import { Product } from '../../model/product';
@@ -45,7 +45,7 @@ export class ProductNewComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private service: ProductsService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<ProductNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Product // Injete os dados do produto  
   ) { }
 
@@ -70,12 +70,12 @@ export class ProductNewComponent implements OnInit {
   }
 
   onCancel() {
-    this.dialog.closeAll();
+    this.dialogRef.close();
   }
 
   private onSuccess() {
     this._snackBar.open('Produto salvo com sucesso!', '', { duration: 3000 });
-    this.dialog.closeAll();
+    this.dialogRef.close(true);
   }
 
   private onError(message: string) {
