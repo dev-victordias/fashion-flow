@@ -22,6 +22,7 @@ export class ProductsNewComponent implements OnInit {
     price: ['', [Validators.required]],
     size: ['', [Validators.required]],
     reference: ['', [Validators.required]],
+    barCode: ['', [Validators.required]],
     quantity: [0, [Validators.required]],
   });
 
@@ -61,6 +62,7 @@ export class ProductsNewComponent implements OnInit {
       type: product.type,
       size: product.size,
       reference: product.reference,
+      barCode: product.barCode,
       quantity: product.quantity,
       price: product.price,
     });

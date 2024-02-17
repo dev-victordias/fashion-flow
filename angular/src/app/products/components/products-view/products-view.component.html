@@ -10,6 +10,16 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Referência</mat-label>
+            <input matInput disabled value="{{data.reference}}">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Código de Barras</mat-label>
+            <input matInput disabled value="{{data.barCode}}">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Categoria</mat-label>
             <input matInput disabled value="{{data.type}}">
         </mat-form-field>
@@ -29,11 +39,6 @@
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Tamanho</mat-label>
             <input matInput disabled value="{{data.size}}">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Referência</mat-label>
-            <input matInput disabled value="{{data.reference}}">
         </mat-form-field>
     </form>
 

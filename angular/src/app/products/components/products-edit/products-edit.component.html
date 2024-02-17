@@ -9,6 +9,18 @@
         <input matInput placeholder="Nome" formControlName="name" #name />
         <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
       </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Referência</mat-label>
+        <input matInput placeholder="Referência" formControlName="reference" #reference />
+        <mat-error *ngIf="form.get('reference')?.invalid">{{ getErrorMessage("reference") }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Código de Barras</mat-label>
+        <input matInput placeholder="Código de Barras" formControlName="barCode" #barCode />
+        <mat-error *ngIf="form.get('barCode')?.invalid">{{ getErrorMessage("barCode") }}</mat-error>
+      </mat-form-field>
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Categoria</mat-label>
@@ -42,13 +54,6 @@
         </mat-select>
         <mat-error *ngIf="form.get('size')?.invalid">{{ getErrorMessage("size") }}</mat-error>
       </mat-form-field>
-  
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Referência</mat-label>
-        <input matInput placeholder="Referência" formControlName="reference" #reference />
-        <mat-error *ngIf="form.get('reference')?.invalid">{{ getErrorMessage("reference") }}</mat-error>
-      </mat-form-field>
-  
     </form>
   </div>
   <div mat-dialog-actions align="end">
