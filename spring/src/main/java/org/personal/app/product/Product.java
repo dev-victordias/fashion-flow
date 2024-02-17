@@ -23,6 +23,9 @@ public class Product {
     @Column(name = "nome", length = 20, nullable = false)
     private String name;
 
+    @Column(name = "barcode", length = 8, nullable = false)
+    private Integer barCode;
+
     @Column(name = "referencia", length = 20, nullable = false)
     private String reference;
 
