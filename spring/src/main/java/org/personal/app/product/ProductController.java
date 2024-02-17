@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ProductController {
     private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @GetMapping
     public List<Product> listProducts() {
@@ -37,16 +38,16 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Product createProduct(@RequestBody Product product) {
-        return productRepository.save(product);
+        return productService.createProduct(product);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updatProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         return productRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(product.getName());
                     recordFound.setType(product.getType());
-                    recordFound.setPrice(product.getPrice());
+                    recordFound.setPrice(product.getPrice()/100);
                     recordFound.setQuantity(product.getQuantity());
                     Product updated = productRepository.save(recordFound);
                     return ResponseEntity.ok().body(updated);
