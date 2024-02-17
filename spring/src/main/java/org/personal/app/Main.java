@@ -20,48 +20,48 @@ public class Main {
 		return args -> {
 			productRepository.deleteAll();
 			Product e = new Product();
-			e.setName("Sara");
-			e.setReference("abc123");
+			e.setName("Vestido Sara");
+			e.setReference("25062");
 			e.setType("Vestido");
 			e.setSize("M");
 			e.setQuantity(10);
-			e.setPrice(50.99);
+			e.setPrice(119.90);
 			productRepository.save(e);
 			
 			Product e2 = new Product();
-			e2.setName("Karol");
-			e2.setReference("def456");
+			e2.setName("Calça Luiza");
+			e2.setReference("35002");
 			e2.setType("Calça");
 			e2.setSize("M");
 			e2.setQuantity(15);
-			e2.setPrice(99.99);
+			e2.setPrice(99.90);
 			productRepository.save(e2);
 
 			Product e3 = new Product();
-			e3.setName("Julia");
-			e3.setReference("ghi678");
+			e3.setName("Vestido Julia");
+			e3.setReference("20022");
 			e3.setType("Vestido");
 			e3.setSize("M");
 			e3.setQuantity(20);
-			e3.setPrice(129.0);
+			e3.setPrice(119.90);
 			productRepository.save(e3);
 
 			Product e4 = new Product();
-			e4.setName("Maria");
-			e4.setReference("jkl910");
+			e4.setName("Conjunto Sara");
+			e4.setReference("50033");
 			e4.setType("Conjunto");
 			e4.setSize("G");
 			e4.setQuantity(5);
-			e4.setPrice(99.99);
+			e4.setPrice(134.90);
 			productRepository.save(e4);
 
 			Product e5 = new Product();
-			e5.setName("Gabriela");
-			e5.setReference("mno111");
-			e5.setType("Blazer");
+			e5.setName("Blazer Kelly");
+			e5.setReference("10291");
+			e5.setType("Casacos");
 			e5.setSize("P");
 			e5.setQuantity(12);
-			e5.setPrice(199.99);
+			e5.setPrice(129.90);
 			productRepository.save(e5);
 		};
 	}
