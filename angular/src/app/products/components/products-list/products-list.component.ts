@@ -63,4 +63,11 @@ export class ProductsListComponent {
     }
 
   }
+
+  formatReference(reference: string): string {
+    if (reference && reference.length >= 5) {
+      return `${reference.slice(0, 4)}-${reference.slice(4)}`;
+    }
+    return reference;
+  }
 }

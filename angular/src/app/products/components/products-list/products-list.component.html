@@ -1,60 +1,90 @@
-<mat-form-field>
+<mat-form-field class="search-bar">
   <mat-label>Pesquisar</mat-label>
-  <input matInput placeholder="Ex.: Vestido Sara" #input (keyup)="applyFilter(input)">
+  <input matInput placeholder="Ex.: Vestido Sara" #input (keyup)="applyFilter(input)"/>
   <button mat-icon-button matSuffix (click)="applyFilter(input)">
     <mat-icon>search</mat-icon>
   </button>
 </mat-form-field>
-<button mat-raised-button color="primary" (click)="onAdd()">Cadastrar</button>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Reference Column -->
-<ng-container matColumnDef="reference">
-  <th mat-header-cell class="center-content" *matHeaderCellDef>Referência</th>
-  <td mat-cell class="center-content" *matCellDef="let element">{{ element.reference }}</td>
-</ng-container>
+  <ng-container matColumnDef="reference">
+    <th mat-header-cell class="center-content" *matHeaderCellDef>Referência</th>
+    <td mat-cell class="center-content" *matCellDef="let element">
+      {{ formatReference(element.reference) }}
+    </td>
+  </ng-container>
 
-<!-- Name Column -->
-<ng-container matColumnDef="name">
-  <th mat-header-cell class="center-content" *matHeaderCellDef>Nome</th>
-  <td mat-cell class="center-content" *matCellDef="let element">{{ element.name }}</td>
-</ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell class="center-content" *matHeaderCellDef>Nome</th>
+    <td mat-cell class="center-content" *matCellDef="let element">
+      {{ element.name }}
+    </td>
+  </ng-container>
 
-<!-- Type Column -->
-<ng-container matColumnDef="type">
-  <th mat-header-cell class="center-content" *matHeaderCellDef>Categoria</th>
-  <td mat-cell class="center-content" *matCellDef="let element">{{ element.type }}</td>
-</ng-container>
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell class="center-content" *matHeaderCellDef>Categoria</th>
+    <td mat-cell class="center-content" *matCellDef="let element">
+      {{ element.type }}
+    </td>
+  </ng-container>
 
-<!-- Quantity Column -->
-<ng-container matColumnDef="quantity">
-  <th mat-header-cell class="center-content" *matHeaderCellDef>Estoque</th>
-  <td mat-cell class="center-content" *matCellDef="let element">{{ element.quantity }}</td>
-</ng-container>
+  <!-- Quantity Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell class="center-content" *matHeaderCellDef>Estoque</th>
+    <td mat-cell class="center-content" *matCellDef="let element">
+      {{ element.quantity }}
+    </td>
+  </ng-container>
 
-<!-- Size Column -->
-<ng-container matColumnDef="size">
-  <th mat-header-cell class="center-content" *matHeaderCellDef>Tamanho</th>
-  <td mat-cell class="center-content" *matCellDef="let element">{{ element.size }}</td>
-</ng-container>
+  <!-- Size Column -->
+  <ng-container matColumnDef="size">
+    <th mat-header-cell class="center-content" *matHeaderCellDef>Tamanho</th>
+    <td mat-cell class="center-content" *matCellDef="let element">
+      {{ element.size }}
+    </td>
+  </ng-container>
 
-<!-- Price Column -->
-<ng-container matColumnDef="price">
-  <th mat-header-cell class="center-content" *matHeaderCellDef>Preço</th>
-  <td mat-cell class="center-content" *matCellDef="let element">{{ element.price | currency:'BRL':'symbol':'1.2-2' }}</td>
-</ng-container>
+  <!-- Price Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell class="center-content" *matHeaderCellDef>Preço</th>
+    <td mat-cell class="center-content" *matCellDef="let element">
+      {{ element.price | currency : "BRL" : "symbol" : "1.2-2" }}
+    </td>
+  </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell class="center-content action-column" *matHeaderCellDef>Ações</th>
+    <th mat-header-cell class="center-content action-column" *matHeaderCellDef>
+      <button mat-raised-button color="primary" (click)="onAdd()">
+        Cadastrar
+      </button>
+    </th>
     <td mat-cell class="center-content action-column" *matCellDef="let product">
-      <button mat-icon-button color="basic" aria-label="Ver detalhes" (click)="onView(product)">
+      <button
+        mat-icon-button
+        color="basic"
+        aria-label="Ver detalhes"
+        (click)="onView(product)"
+      >
         <mat-icon>info</mat-icon>
       </button>
-      <button mat-icon-button color="primary" aria-label="Editar produto" (click)="onEdit(product)">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Editar produto"
+        (click)="onEdit(product)"
+      >
         <mat-icon>edit_square</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Remover produto" (click)="onDelete(product)">
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Remover produto"
+        (click)="onDelete(product)"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </td>
@@ -71,4 +101,7 @@
   </tr>
 </table>
 
-<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
+<mat-paginator
+  [pageSizeOptions]="[10, 25, 50, 100]"
+  aria-label="Select page of users"
+></mat-paginator>

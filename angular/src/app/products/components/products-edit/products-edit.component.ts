@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observer } from 'rxjs';
 import { Product } from '../../model/product';
@@ -11,14 +15,14 @@ import { CurrencyPipe } from '@angular/common';
   selector: 'app-products-edit',
   templateUrl: './products-edit.component.html',
   styleUrls: ['./products-edit.component.scss'],
-  providers: [CurrencyPipe]
+  providers: [CurrencyPipe],
 })
-export class ProductEditComponent implements OnInit {
+export class ProductsEditComponent implements OnInit {
   form = this.formBuilder.group({
     _id: [''],
     name: ['', [Validators.required]],
     type: ['', [Validators.required]],
-    price: [0, [Validators.required]],
+    price: ['', [Validators.required]],
     size: ['', [Validators.required]],
     reference: ['', [Validators.required]],
     quantity: [0, [Validators.required]],
@@ -46,13 +50,17 @@ export class ProductEditComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private service: ProductsService,
     private _snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<ProductEditComponent>,
+    private dialogRef: MatDialogRef<ProductsEditComponent>,
     private currencyPipe: CurrencyPipe,
-    @Inject(MAT_DIALOG_DATA) public data: Product // Injete os dados do produto  
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: Product // Injete os dados do produto
+  ) {}
 
   ngOnInit(): void {
     const product: Product = this.data;
+
+    // Formata o preço usando CurrencyPipe
+    const formattedPrice = this.formatPriceView(product.price) ?? '0';
+
     this.form.setValue({
       _id: product._id,
       name: product.name,
@@ -60,23 +68,18 @@ export class ProductEditComponent implements OnInit {
       size: product.size,
       reference: product.reference,
       quantity: product.quantity,
-      price: product.price,
+      price: formattedPrice,
     });
   }
   onSubmit() {
     if (this.form.valid) {
-      this.normalizePrice();
       this.service.save(this.form.value).subscribe(this.observer);
     }
   }
-  
-  private normalizePrice() {
-    const price = this.form.get('price');
-    if (price && price.value !== undefined) {
-      price.setValue(price.value / 100);
-    }
+
+  private formatPriceView(price: string) {
+    return this.currencyPipe.transform(price, 'BRL', '', '1.2-2');
   }
-  
 
   onCancel() {
     this.dialogRef.close();
@@ -94,9 +97,10 @@ export class ProductEditComponent implements OnInit {
   observer: Observer<any> = {
     next: () => this.onSuccess(),
     error: () => this.onError('Erro na conexão com o banco de dados!'),
-    complete: () => {/* optional complete handling */ }
+    complete: () => {
+      /* optional complete handling */
+    },
   };
-
 
   getErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);
@@ -123,8 +127,13 @@ export class ProductEditComponent implements OnInit {
   formatPrice(event: any) {
     let element = event.target;
     let value = element.value;
-    let numberValue = Number(value) / 100;
-  
-    element.value = this.currencyPipe.transform(numberValue, 'BRL', '', '1.2-2', 'pt-BR');
+
+    element.value = this.currencyPipe.transform(
+      value / 100,
+      'BRL',
+      '',
+      '1.2-2',
+      'pt-BR'
+    );
   }
 }

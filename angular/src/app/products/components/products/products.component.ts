@@ -4,13 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { ViewDialogComponent } from 'src/app/shared/components/view-dialog/view-dialog.component';
-import { ProductNewComponent } from '../products-new/products-new.component';
-import { ProductEditComponent } from '../products-edit/products-edit.component';
+import { ProductsEditComponent } from '../products-edit/products-edit.component';
+import { ProductsNewComponent } from '../products-new/products-new.component';
+import { ProductsViewComponent } from '../products-view/products-view.component';
 
 
 @Component({
@@ -53,7 +53,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onAdd() {
-    this.dialog.open(ProductNewComponent, {
+    this.dialog.open(ProductsNewComponent, {
       width: '600px',
     });
   }
@@ -63,7 +63,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onView(product: Product) {
-    const dialogRef = this.dialog.open(ViewDialogComponent, {
+    const dialogRef = this.dialog.open(ProductsViewComponent, {
       width: '600px',
       data: product,
     });
@@ -75,7 +75,7 @@ export class ProductsComponent implements OnInit {
   }
 
   openEditDialog(product: Product) {
-    const dialogRef = this.dialog.open(ProductEditComponent, {
+    const dialogRef = this.dialog.open(ProductsEditComponent, {
       width: '600px',
       data: product,
     });

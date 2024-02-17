@@ -17,7 +17,8 @@
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Preço</mat-label>
             <span matTextPrefix>R$&nbsp;</span>
-            <input matInput disabled value="{{data.price}}">
+            <input matInput disabled value="{{ data.price | currency:'BRL':'':'1.2-2' }}">
+            
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">

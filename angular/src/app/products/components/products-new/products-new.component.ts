@@ -5,18 +5,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observer } from 'rxjs';
 import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
+import { CurrencyPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './products-new.component.html',
   styleUrls: ['./products-new.component.scss'],
+  providers: [CurrencyPipe],
 })
-export class ProductNewComponent implements OnInit {
+export class ProductsNewComponent implements OnInit {
   form = this.formBuilder.group({
     _id: [''],
     name: ['', [Validators.required]],
     type: ['', [Validators.required]],
-    price: [0, [Validators.required]],
+    price: ['', [Validators.required]],
     size: ['', [Validators.required]],
     reference: ['', [Validators.required]],
     quantity: [0, [Validators.required]],
@@ -45,7 +48,8 @@ export class ProductNewComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private service: ProductsService,
     private _snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<ProductNewComponent>,
+    private dialogRef: MatDialogRef<ProductsNewComponent>,
+    private currencyPipe: CurrencyPipe,
     @Inject(MAT_DIALOG_DATA) public data: Product // Injete os dados do produto  
   ) { }
 
@@ -110,12 +114,16 @@ export class ProductNewComponent implements OnInit {
     }
     return 'Campo inválido!';
   }
+  formatPrice(event: any) {
+    let element = event.target;
+    let value = element.value;
 
-  formatPrice() {
-  let value = this.form.get('price')?.value;
-  if (value !== undefined) {
-    const formattedValue = (parseFloat(value.toString()) / 100).toFixed(2);
-    this.form.get('price')?.setValue(parseFloat(formattedValue), { emitEvent: false });
+    element.value = this.currencyPipe.transform(
+      value / 100,
+      'BRL',
+      '',
+      '1.2-2',
+      'pt-BR'
+    );
   }
-}
 }

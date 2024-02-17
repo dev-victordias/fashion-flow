@@ -3,15 +3,15 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dial
 import { Product } from 'src/app/products/model/product';
 
 @Component({
-  selector: 'app-view-dialog',
-  templateUrl: './view-dialog.component.html',
-  styleUrls: ['./view-dialog.component.scss']
+  selector: 'app-products-view',
+  templateUrl: './products-view.component.html',
+  styleUrls: ['./products-view.component.scss']
 })
-export class ViewDialogComponent {
+export class ProductsViewComponent {
   @Output() editClicked = new EventEmitter<Product>();
 
   constructor(
-    public dialogRef: MatDialogRef<ViewDialogComponent>,
+    public dialogRef: MatDialogRef<ProductsViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Product,
     public dialog: MatDialog,
   ) { }
