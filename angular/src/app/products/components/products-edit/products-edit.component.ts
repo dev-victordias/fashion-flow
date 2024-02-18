@@ -19,7 +19,6 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductsEditComponent implements OnInit {
   form = this.formBuilder.group({
-    _id: [''],
     name: ['', [Validators.required]],
     type: ['', [Validators.required]],
     price: ['', [Validators.required]],
@@ -58,12 +57,11 @@ export class ProductsEditComponent implements OnInit {
 
   ngOnInit(): void {
     const product: Product = this.data;
-
+    console.log(product)
     // Formata o preço usando CurrencyPipe
     const formattedPrice = this.formatPriceView(product.price) ?? '0';
 
     this.form.setValue({
-      _id: product._id,
       name: product.name,
       type: product.type,
       size: product.size,
