@@ -57,7 +57,6 @@ export class ProductsEditComponent implements OnInit {
 
   ngOnInit(): void {
     const product: Product = this.data;
-    console.log(product)
     // Formata o preço usando CurrencyPipe
     const formattedPrice = this.formatPriceView(product.price) ?? '0';
 
