@@ -19,6 +19,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductsEditComponent implements OnInit {
   form = this.formBuilder.group({
+    _id: [''],
     name: ['', [Validators.required]],
     type: ['', [Validators.required]],
     price: ['', [Validators.required]],
@@ -61,6 +62,7 @@ export class ProductsEditComponent implements OnInit {
     const formattedPrice = this.formatPriceView(product.price) ?? '0';
 
     this.form.setValue({
+      _id: product._id,
       name: product.name,
       type: product.type,
       size: product.size,
@@ -70,15 +72,21 @@ export class ProductsEditComponent implements OnInit {
       price: formattedPrice,
     });
   }
+  
   onSubmit() {
     if (this.form.valid) {
+      this.form.value.price = this.form.value.price?.replace(",", ".");
       this.service.save(this.form.value).subscribe(this.observer);
+    } else {
+      this.dialogRef.close();
     }
   }
 
   private formatPriceView(price: string) {
+    // Use o currencyPipe para formatar o preço
     return this.currencyPipe.transform(price, 'BRL', '', '1.2-2');
   }
+  
 
   onCancel() {
     this.dialogRef.close();
@@ -128,7 +136,7 @@ export class ProductsEditComponent implements OnInit {
     let value = element.value;
 
     element.value = this.currencyPipe.transform(
-      value / 100,
+      value/100,
       'BRL',
       '',
       '1.2-2',
