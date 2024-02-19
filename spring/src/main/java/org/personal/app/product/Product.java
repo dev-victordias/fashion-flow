@@ -32,7 +32,7 @@ public class Product {
     @NotNull(message = "O código de barras é obrigatório!")
     @Size(min = 8, max = 8, message = "O código de barras deve ter exatamente 8 caracteres!")
     @Digits(integer = 8, fraction = 0, message = "O código de barras deve ser um número inteiro!")
-    @Column(name = "barcode", length = 8, nullable = false)
+    @Column(name = "barcode", length = 8, nullable = false, unique = true)
     private Integer barCode;
 
     @NotBlank(message = "A referência do produto é obrigatória!")
@@ -61,15 +61,4 @@ public class Product {
     @NotNull(message = "A quantidade do produto é obrigatória!")
     @Column(name = "quantidade", nullable = false)
     private Integer quantity;
-
-    public void setPrice(Double price) {
-        this.price = normalizePrice(price);
-    }
-    
-    private Double normalizePrice(Double price) {
-        if (price == null) {
-            return null;
-        }
-        return price / 100;
-    }
 }

@@ -1,59 +1,62 @@
 package org.personal.app.product;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
-import javax.validation.Valid;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    private final ProductDTOMapper productDTOMapper;
 
-    public ProductService(ProductRepository productRepository, ProductDTOMapper productDTOMapper) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.productDTOMapper = productDTOMapper;
     }
 
     public void addProduct(Product product) {
-        productRepository.save(product);
+        Optional<Product> optional = productRepository.findByReference(product.getReference());
+        if(!optional.isPresent()) {
+            product.setPrice(product.getPrice()/100);
+            productRepository.save(product);
+        }
     }
 
-    public ProductDTO getProductById(Long id) {
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElseThrow();
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    public ResponseEntity<Product> updateProduct(Long id, Product updateRequest) {
         return productRepository.findById(id)
-                .map(productDTOMapper)
-                .orElseThrow();
+                .map(recordFound -> {
+                    recordFound.setName(updateRequest.getName());
+                    recordFound.setBarCode(updateRequest.getBarCode());
+                    recordFound.setReference(updateRequest.getReference());
+                    recordFound.setType(updateRequest.getType());
+                    recordFound.setSize(updateRequest.getSize());
+                    recordFound.setDescription(updateRequest.getDescription());
+                    recordFound.setPrice(hasPriceChanged(recordFound.getPrice(), updateRequest.getPrice()));
+                    recordFound.setQuantity(updateRequest.getQuantity());
+                    Product updated = productRepository.save(recordFound);
+                    return ResponseEntity.ok().body(updated);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
-                .map(productDTOMapper)
-                .collect(Collectors.toList());
-    }
-
-    public void updateProduct(Long id, @Valid Product updateRequest) {
-        Product product = productRepository.findById(id).orElseThrow();
-
-        product.setName(updateRequest.getName());
-        product.setBarCode(updateRequest.getBarCode());
-        product.setReference(updateRequest.getReference());
-        product.setType(updateRequest.getType());
-        product.setSize(updateRequest.getSize());
-        product.setDescription(updateRequest.getDescription());
-        product.setPrice(updateRequest.getPrice());
-        product.setQuantity(updateRequest.getQuantity());
-
-        productRepository.save(product);
-
-    }
-
-    public void deleteProduct(@PathVariable Long id) {
+    public void deleteProduct(Long id) {
         productRepository.findById(id).orElseThrow();
         productRepository.deleteById(id);
+    }
+
+    private Double hasPriceChanged(Double original, Double update) {
+        if (original.toString().equals(update.toString())) {
+            return original;
+        }
+        return update / 100;
     }
 
 }

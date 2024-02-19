@@ -31,21 +31,20 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> listProducts() {
-        List<ProductDTO> productsList = productService.getAllProducts();
+    public ResponseEntity<List<Product>> listProducts() {
+        List<Product> productsList = productService.getAllProducts();
         return new ResponseEntity<>(productsList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> findProductById(@PathVariable Long id) {
-        ProductDTO product = productService.getProductById(id);
+    public ResponseEntity<Product> findProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
-        productService.updateProduct(id, product);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> updateExistingProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
+        return productService.updateProduct(id, product);
     }
 
     @DeleteMapping("/{id}")

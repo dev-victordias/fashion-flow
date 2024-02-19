@@ -26,7 +26,7 @@ public class Main {
 			e.setType("Vestido");
 			e.setSize("M");
 			e.setQuantity(10);
-			e.setPrice(11900.90);
+			e.setPrice(119.90);
 			productRepository.save(e);
 			
 			Product e2 = new Product();
@@ -36,7 +36,7 @@ public class Main {
 			e2.setType("Calça");
 			e2.setSize("M");
 			e2.setQuantity(15);
-			e2.setPrice(9900.90);
+			e2.setPrice(99.90);
 			productRepository.save(e2);
 			
 			Product e3 = new Product();
@@ -46,7 +46,7 @@ public class Main {
 			e3.setType("Vestido");
 			e3.setSize("M");
 			e3.setQuantity(20);
-			e3.setPrice(11900.90);
+			e3.setPrice(119.90);
 			productRepository.save(e3);
 			
 			Product e4 = new Product();
@@ -56,7 +56,7 @@ public class Main {
 			e4.setType("Conjunto");
 			e4.setSize("G");
 			e4.setQuantity(5);
-			e4.setPrice(13400.90);
+			e4.setPrice(134.90);
 			productRepository.save(e4);
 			
 			Product e5 = new Product();
@@ -66,7 +66,7 @@ public class Main {
 			e5.setType("Casacos");
 			e5.setSize("P");
 			e5.setQuantity(12);
-			e5.setPrice(12900.90);
+			e5.setPrice(129.90);
 			productRepository.save(e5);
 		};
 	}
