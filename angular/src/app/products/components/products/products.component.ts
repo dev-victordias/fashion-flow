@@ -12,7 +12,6 @@ import { ProductsEditComponent } from '../products-edit/products-edit.component'
 import { ProductsNewComponent } from '../products-new/products-new.component';
 import { ProductsViewComponent } from '../products-view/products-view.component';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -28,7 +27,7 @@ export class ProductsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar
   ) {
     this.refresh();
   }
@@ -53,8 +52,11 @@ export class ProductsComponent implements OnInit {
   }
 
   onAdd() {
-    this.dialog.open(ProductsNewComponent, {
+    const dialogRef = this.dialog.open(ProductsNewComponent, {
       width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh();
     });
   }
 
@@ -68,10 +70,12 @@ export class ProductsComponent implements OnInit {
       data: product,
     });
 
-    dialogRef.componentInstance.editClicked.subscribe((editedProduct: Product) => {
-      dialogRef.close();
-      this.openEditDialog(editedProduct);
-    });
+    dialogRef.componentInstance.editClicked.subscribe(
+      (editedProduct: Product) => {
+        dialogRef.close();
+        this.openEditDialog(editedProduct);
+      }
+    );
   }
 
   openEditDialog(product: Product) {
@@ -80,10 +84,10 @@ export class ProductsComponent implements OnInit {
       data: product,
     });
     dialogRef.afterClosed().subscribe((result: boolean) => {
-      if(result) {
+      if (result) {
         this.refresh();
       }
-    })
+    });
   }
 
   onRemove(product: Product) {
@@ -99,7 +103,7 @@ export class ProductsComponent implements OnInit {
             this._snackBar.open('Produto removido com sucesso!', 'X', {
               duration: 5000,
               verticalPosition: 'top',
-              horizontalPosition: 'center'
+              horizontalPosition: 'center',
             });
           },
           () => this.onError('Erro ao tentar remover produto.')
