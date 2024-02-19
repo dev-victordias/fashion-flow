@@ -16,7 +16,6 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductsNewComponent implements OnInit {
   form = this.formBuilder.group({
-    _id: [''],
     name: ['', [Validators.required]],
     type: ['', [Validators.required]],
     price: ['', [Validators.required]],
@@ -55,23 +54,15 @@ export class ProductsNewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const product: Product = this.data;
-    this.form.setValue({
-      _id: product._id,
-      name: product.name,
-      type: product.type,
-      size: product.size,
-      reference: product.reference,
-      barCode: product.barCode,
-      quantity: product.quantity,
-      price: product.price,
-    });
   }
 
 
   onSubmit() {
     if (this.form.valid) {
-      this.service.save(this.form.value).subscribe(this.observer)
+      this.form.value.price = this.form.value.price?.replace(",", ".");
+      this.service.save(this.form.value).subscribe(this.observer);
+    } else {
+      this.dialogRef.close();
     }
   }
 
