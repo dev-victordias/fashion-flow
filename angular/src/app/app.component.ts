@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   onTabSelected(event: any) {
-    console.log(event);
+    console.log('Tab selected:', event.index);
     switch (event.index) {
       case 0:
         this.router.navigate(['/'], { relativeTo: this.route });
@@ -24,7 +24,7 @@ export class AppComponent {
         this.router.navigate(['/products'], { relativeTo: this.route });
         break;
       case 3:
-        this.router.navigate(['/'], { relativeTo: this.route });
+        this.router.navigate(['/customers'], { relativeTo: this.route });
         break;
       default:
         break;

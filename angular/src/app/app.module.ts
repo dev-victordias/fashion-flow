@@ -13,6 +13,8 @@ import { SharedModule } from "./shared/shared.module";
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { CustomersModule } from './customers/customers.module';
+import { ProductsModule } from './products/products.module';
 
 registerLocaleData(localePt);
 
@@ -29,7 +31,9 @@ registerLocaleData(localePt);
     MatToolbarModule,
     MatIconModule,
     MatTabsModule,
-    SharedModule
+    SharedModule,
+    CustomersModule,
+    ProductsModule
   ]
 })
 export class AppModule { }

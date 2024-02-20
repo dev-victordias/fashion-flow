@@ -9,6 +9,6 @@
 <mat-tab-group (selectedTabChange)="onTabSelected($event)">
   <mat-tab label="Dashboard"> Dashboard </mat-tab>
   <mat-tab label="Vendas"> Vendas </mat-tab>
-  <mat-tab label="Estoque"> <router-outlet></router-outlet> </mat-tab>
-  <mat-tab label="Clientes"> Clientes </mat-tab>
+  <mat-tab label="Estoque"> <app-products></app-products> </mat-tab>
+  <mat-tab label="Clientes"> <app-customers></app-customers> </mat-tab>
 </mat-tab-group>
