@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>
+  <mat-toolbar color="accent"> Cadastro </mat-toolbar>
+</h2>
+
+<div mat-dialog-content>
+    <form [formGroup]="clientForm" class="example-form" (ngSubmit)="onSubmit()">
+        <mat-radio-group formControlName="clientType">
+            <mat-radio-button value="individual">Pessoa Física</mat-radio-button>
+            <mat-radio-button value="company">Pessoa Jurídica</mat-radio-button>
+        </mat-radio-group>
+
+        <div *ngIf="clientForm.get('clientType')?.value === 'individual'">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Nome" formControlName="name" #nameInput/>
+                <mat-error *ngIf="clientForm.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>CPF</mat-label>
+                <input matInput placeholder="CPF" formControlName="cpf" #cpfInput/>
+                <mat-error *ngIf="clientForm.get('cpf')?.invalid">{{ getErrorMessage("cpf") }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="clientForm.get('clientType')?.value === 'company'">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nome Fantasia</mat-label>
+                <input matInput placeholder="Nome Fantasia" formControlName="companyName" #companyNameInput />
+                <mat-error *ngIf="clientForm.get('companyName')?.invalid">{{ getErrorMessage("companyName") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>CNPJ</mat-label>
+                <input matInput placeholder="CNPJ" formControlName="cnpj" #cnpjInput/>
+                <mat-error *ngIf="clientForm.get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </form>
+</div>

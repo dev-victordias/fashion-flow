@@ -18,6 +18,7 @@ export class CustomersListComponent {
   readonly displayedColumns = [
     'name',
     'email',
+    'actions'
   ];
   dataSource = new MatTableDataSource<Customer>([]);
 
@@ -40,6 +41,10 @@ export class CustomersListComponent {
       this.dataSource.paginator.firstPage();
     }
 
+  }
+
+  onAdd() {
+    this.add.emit(true);
   }
 
 }

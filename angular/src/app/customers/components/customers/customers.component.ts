@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Customer } from '../../model/customer';
 import { CustomersService } from '../../services/customers.service';
+import { CustomersNewComponent } from '../../customers-new/customers-new.component';
 
 @Component({
   selector: 'app-customers',
@@ -43,6 +44,15 @@ export class CustomersComponent implements OnInit {
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg,
+    });
+  }
+
+  onAdd() {
+    const dialogRef = this.dialog.open(CustomersNewComponent, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh();
     });
   }
 }
