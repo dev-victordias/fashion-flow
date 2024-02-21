@@ -4,20 +4,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-customers-new',
   templateUrl: './customers-new.component.html',
-  styleUrls: ['./customers-new.component.scss']
+  styleUrls: ['./customers-new.component.scss'],
 })
 export class CustomersNewComponent implements OnInit {
   clientForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.clientForm = this.fb.group({
       clientType: ['individual'], // Valor padrão pode ser alterado conforme necessário
       name: ['', Validators.required],
       cpf: ['', Validators.required],
+      phone: ['', Validators.required],
+      birth: ['', Validators.required],
       companyName: ['', Validators.required],
-      cnpj: ['', Validators.required]
+      cnpj: ['', Validators.required],
     });
   }
 
@@ -47,5 +49,4 @@ export class CustomersNewComponent implements OnInit {
     }
     return 'Campo inválido!';
   }
-
 }

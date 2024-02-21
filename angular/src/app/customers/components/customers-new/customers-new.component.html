@@ -21,6 +21,14 @@
                 <input matInput placeholder="CPF" formControlName="cpf" #cpfInput/>
                 <mat-error *ngIf="clientForm.get('cpf')?.invalid">{{ getErrorMessage("cpf") }}</mat-error>
             </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Data de Nascimento</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="DD/MM/YYYY" formControlName="birth" #birthInput/>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="clientForm.get('birth')?.invalid">{{ getErrorMessage("birth") }}</mat-error>
+              </mat-form-field>
         </div>
 
         <div *ngIf="clientForm.get('clientType')?.value === 'company'">

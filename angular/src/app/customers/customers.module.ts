@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CustomersListComponent } from './components/customers-list/customers-list.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { CustomersRoutingModule } from './customers-routing.module';
-import { CustomersNewComponent } from './customers-new/customers-new.component';
+import { CustomersNewComponent } from './components/customers-new/customers-new.component';
 import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
