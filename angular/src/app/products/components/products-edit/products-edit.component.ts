@@ -28,12 +28,17 @@ export class ProductsEditComponent implements OnInit {
     barCode: ['', [Validators.required]],
     quantity: [0, [Validators.required]],
   });
+
   typeOptions = [
-    { value: 'Vestido', viewValue: 'Vestido' },
-    { value: 'Calça', viewValue: 'Calça' },
     { value: 'Blusa', viewValue: 'Blusa' },
-    { value: 'Blazer', viewValue: 'Blazer' },
-    { value: 'Conjunto', viewValue: 'Conjunto' },
+    { value: 'Saia', viewValue: 'Saia' },
+    { value: 'Calça', viewValue: 'Calça' },
+    { value: 'Short', viewValue: 'Short' },
+    { value: 'Vestido', viewValue: 'Vestido' },
+    { value: 'Macacão', viewValue: 'Macacão' },
+    { value: 'Casaco', viewValue: 'Casaco' },
+    { value: 'Calçado', viewValue: 'Calçado' },
+    { value: 'Acessório', viewValue: 'Acessório' },
     // Adicione mais opções conforme necessário
   ];
 
