@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-customers-new',
@@ -7,19 +7,32 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./customers-new.component.scss'],
 })
 export class CustomersNewComponent implements OnInit {
+
   clientForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  cpf = new FormControl('', [
+    Validators.required,
+    //Validators.pattern('^[0-9]*$'),
+    //Validators.maxLength(14)
+  ]);
+
+  cnpj = new FormControl('', [
+    Validators.required,
+    //Validators.pattern('^[0-9]*$'),
+    //Validators.maxLength(18)
+  ]);
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.clientForm = this.fb.group({
       clientType: ['individual'], // Valor padrão pode ser alterado conforme necessário
       name: ['', Validators.required],
-      cpf: ['', Validators.required],
+      cpf: this.cpf,
       phone: ['', Validators.required],
       birth: ['', Validators.required],
       companyName: ['', Validators.required],
-      cnpj: ['', Validators.required],
+      cnpj: this.cnpj,
     });
   }
 
@@ -48,5 +61,22 @@ export class CustomersNewComponent implements OnInit {
       return `Tamanho máximo de ${requiredLength} caracteres excedido`;
     }
     return 'Campo inválido!';
+  }
+
+  cpfMask($event: KeyboardEvent) {
+    let value = this.cpf.value?.replace(/\D/g, "");
+    value = value?.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value?.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value?.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    this.cpf.setValue(value ? value : "");
+  }
+
+  cnpjMask($event: KeyboardEvent) {
+    let value = this.cnpj.value?.replace(/\D/g, "");
+    value = value?.replace(/^(\d{2})(\d)/, "$1.$2");
+    value = value?.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+    value = value?.replace(/\.(\d{3})(\d)/, ".$1/$2");
+    value = value?.replace(/(\d{4})(\d)/, "$1-$2");
+    this.cnpj.setValue(value ? value : "", { emitEvent: false });
   }
 }

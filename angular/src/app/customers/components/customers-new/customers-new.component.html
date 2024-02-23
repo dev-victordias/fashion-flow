@@ -18,13 +18,13 @@
 
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>CPF</mat-label>
-                <input matInput placeholder="CPF" formControlName="cpf" #cpfInput/>
+                <input maxlength="14" matInput [formControl]="cpf" (keyup)="cpfMask($event)" placeholder="CPF" formControlName="cpf" #cpfInput/>
                 <mat-error *ngIf="clientForm.get('cpf')?.invalid">{{ getErrorMessage("cpf") }}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Data de Nascimento</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="DD/MM/YYYY" formControlName="birth" #birthInput/>
+                <input matInput [matDatepicker]="picker" placeholder="DD/MM/AAAA" formControlName="birth" #birthInput/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="clientForm.get('birth')?.invalid">{{ getErrorMessage("birth") }}</mat-error>
@@ -40,7 +40,7 @@
 
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>CNPJ</mat-label>
-                <input matInput placeholder="CNPJ" formControlName="cnpj" #cnpjInput/>
+                <input maxlength="18" matInput [formControl]="cnpj" (keyup)="cnpjMask($event)" placeholder="CNPJ" formControlName="cnpj" #cnpjInput/>
                 <mat-error *ngIf="clientForm.get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
             </mat-form-field>
         </div>
