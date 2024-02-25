@@ -17,12 +17,13 @@ import { AppComponent } from './app.component';
 import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from "./shared/shared.module";
+import { DatePipe } from '@angular/common';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [AppComponent],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,

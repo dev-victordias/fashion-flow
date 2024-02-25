@@ -24,10 +24,8 @@
 
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Data de Nascimento</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="DD/MM/AAAA" formControlName="birth" #birthInput/>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="clientForm.get('birth')?.invalid">{{ getErrorMessage("birth") }}</mat-error>
+                <input maxlength="10" matInput [formControl]="date" (input)="dateMask()" placeholder="dd/mm/aaaa" formControlName="date" #dateInput/>
+                <mat-error *ngIf="clientForm.get('date')?.invalid">{{ getErrorMessage("date") }}</mat-error>
               </mat-form-field>
         </div>
 
