@@ -29,7 +29,10 @@ export class CustomersNewComponent implements OnInit {
     //Validators.maxLength(18)
   ]);
 
-  date = new FormControl('', [Validators.required, this.dateValidator.bind(this)]);
+  date = new FormControl('', [
+    Validators.required,
+    this.dateValidator.bind(this),
+  ]);
 
   constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
 
@@ -130,6 +133,13 @@ export class CustomersNewComponent implements OnInit {
     const day = parseInt(parts[0], 10);
     const month = parseInt(parts[1], 10) - 1; // Mês é base 0 no objeto Date
     const year = parseInt(parts[2], 10);
+
+    const currentYear = new Date().getFullYear();
+    const minYear = 1900;
+
+    if (year < minYear || year > currentYear) {
+      return { invalidDate: true, invalidYear: true };
+    }
 
     const dateObject = new Date(year, month, day);
 
