@@ -8,6 +8,7 @@ import { Customer } from '../model/customer';
 })
 export class CustomersService {
   private readonly API = 'api/v1/customers';
+  private readonly CEP_API = 'https://viacep.com.br/ws/';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -24,6 +25,10 @@ export class CustomersService {
       return this.update(record);
     }
     return this.create(record);
+  }
+
+  searchCep(cep: string) {
+    return this.httpClient.get(`${this.CEP_API}/${cep}/json`).pipe(first());
   }
 
   private create(record: Partial<Customer>) {

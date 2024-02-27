@@ -8,6 +8,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Observer } from 'rxjs';
+import { CustomersService } from '../../services/customers.service';
 
 @Component({
   selector: 'app-customers-new',
@@ -17,36 +19,47 @@ import {
 export class CustomersNewComponent implements OnInit {
   clientForm!: FormGroup;
 
-  cpf = new FormControl('', [
-    Validators.required,
-    //Validators.pattern('^[0-9]*$'),
-    //Validators.maxLength(14)
-  ]);
+  cpf = new FormControl('', [Validators.required]);
 
-  cnpj = new FormControl('', [
-    Validators.required,
-    //Validators.pattern('^[0-9]*$'),
-    //Validators.maxLength(18)
-  ]);
+  cnpj = new FormControl('', [Validators.required]);
 
   date = new FormControl('', [
     Validators.required,
     this.dateValidator.bind(this),
   ]);
 
-  constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  constructor(
+    private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private service: CustomersService
+  ) {}
 
   ngOnInit(): void {
     this.clientForm = this.fb.group({
       clientType: ['individual'], // Valor padrão pode ser alterado conforme necessário
       name: ['', Validators.required],
       cpf: this.cpf,
+      email: this.email,
       phone: ['', Validators.required],
       date: this.date,
       companyName: ['', Validators.required],
       cnpj: this.cnpj,
+      address: '',
+      neighborhood: '',
+      city: '',
+      state: '',
     });
   }
+
+  observer: Observer<any> = {
+    next: () => console.log('sucesso'),
+    error: () => console.log('falha'),
+    complete: () => {
+      /* optional complete handling */
+    },
+  };
 
   onSubmit() {
     // Lógica para enviar dados ao servidor
@@ -152,5 +165,24 @@ export class CustomersNewComponent implements OnInit {
     }
 
     return null; // A data é válida
+  }
+
+  teste(element: HTMLInputElement) {
+    let cep = element.value;
+    console.log(cep);
+    this.service.searchCep(cep).subscribe(
+      (returnCep: any) => {
+        console.log(returnCep)
+        this.clientForm.patchValue({
+          address: returnCep.logradouro,
+          neighborhood: returnCep.bairro,
+          city: returnCep.localidade,
+          state: returnCep.uf,
+        });
+      },
+      (error) => {
+        console.error('Erro na chamada de API', error);
+      }
+    );
   }
 }
