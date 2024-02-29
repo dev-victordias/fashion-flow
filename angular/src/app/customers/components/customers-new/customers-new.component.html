@@ -45,13 +45,19 @@
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input maxlength="15" matInput [formControl]="phone" (keyup)="phoneMask($event)" formControlName="phone" #phoneInput/>
+            <mat-error *ngIf="clientForm.get('phone')?.invalid">{{ getErrorMessage("phone") }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
             <mat-label>E-mail</mat-label>
             <input matInput type="email" [formControl]="email" #emailInput>
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>CEP</mat-label>
-            <input matInput placeholder="00.000-000" #cepInput>
+            <input maxlength="9" matInput [formControl]="cep" (keyup)="cepMask($event)" placeholder="00000-000" #cepInput>
             <button type="button" mat-icon-button matSuffix (click)="teste(cepInput)">
                 <mat-icon>search</mat-icon>
             </button>

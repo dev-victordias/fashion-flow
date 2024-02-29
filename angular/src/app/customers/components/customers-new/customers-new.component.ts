@@ -23,6 +23,10 @@ export class CustomersNewComponent implements OnInit {
 
   cnpj = new FormControl('', [Validators.required]);
 
+  cep = new FormControl('', [Validators.required]);
+
+  phone = new FormControl('', [Validators.required]);
+
   date = new FormControl('', [
     Validators.required,
     this.dateValidator.bind(this),
@@ -42,10 +46,11 @@ export class CustomersNewComponent implements OnInit {
       name: ['', Validators.required],
       cpf: this.cpf,
       email: this.email,
-      phone: ['', Validators.required],
+      phone: this.phone,
       date: this.date,
       companyName: ['', Validators.required],
       cnpj: this.cnpj,
+      cep: this.cep,
       address: '',
       neighborhood: '',
       city: '',
@@ -103,6 +108,28 @@ export class CustomersNewComponent implements OnInit {
     value = value?.replace(/\.(\d{3})(\d)/, '.$1/$2');
     value = value?.replace(/(\d{4})(\d)/, '$1-$2');
     this.cnpj.setValue(value ? value : '', { emitEvent: false });
+  }
+
+  phoneMask($event: KeyboardEvent) {
+    let value = this.phone.value?.replace(/\D/g, '');
+
+    if (value!.length >= 2) {
+      value = value?.replace(/^(\d{2})/, '($1) ');
+    }
+
+    if (value!.length > 12) {
+      value = value?.replace(/(\d{4})$/, '-$1');
+    }
+
+    this.phone.setValue(value || '', { emitEvent: false });
+  }
+
+  cepMask($event: KeyboardEvent) {
+    let value = this.cep.value?.replace(/\D/g, '');
+
+    value = value?.replace(/^(\d{5})(\d{0,3})$/, '$1-$2');
+
+    this.cep.setValue(value || '', { emitEvent: false });
   }
 
   dateMask() {
@@ -172,7 +199,7 @@ export class CustomersNewComponent implements OnInit {
     console.log(cep);
     this.service.searchCep(cep).subscribe(
       (returnCep: any) => {
-        console.log(returnCep)
+        console.log(returnCep);
         this.clientForm.patchValue({
           address: returnCep.logradouro,
           neighborhood: returnCep.bairro,
