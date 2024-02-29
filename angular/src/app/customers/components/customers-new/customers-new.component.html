@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>
+  <mat-toolbar color="accent"> Cadastro </mat-toolbar>
+</h2>
+
+<div mat-dialog-content>
+    <form [formGroup]="clientForm" class="example-form" (ngSubmit)="onSubmit()">
+        <mat-radio-group formControlName="clientType">
+            <mat-radio-button value="individual">Pessoa Física</mat-radio-button>
+            <mat-radio-button value="company">Pessoa Jurídica</mat-radio-button>
+        </mat-radio-group>
+
+        <div *ngIf="clientForm.get('clientType')?.value === 'individual'">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Nome" formControlName="name" #nameInput/>
+                <mat-error *ngIf="clientForm.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>CPF</mat-label>
+                <input maxlength="14" matInput [formControl]="cpf" (keyup)="cpfMask($event)" placeholder="CPF" formControlName="cpf" #cpfInput/>
+                <mat-error *ngIf="clientForm.get('cpf')?.invalid">{{ getErrorMessage("cpf") }}</mat-error>
+            </mat-form-field>
+
+        </div>
+        
+        <div *ngIf="clientForm.get('clientType')?.value === 'company'">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nome Fantasia</mat-label>
+                <input matInput placeholder="Nome Fantasia" formControlName="companyName" #companyNameInput />
+                <mat-error *ngIf="clientForm.get('companyName')?.invalid">{{ getErrorMessage("companyName") }}</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>CNPJ</mat-label>
+                <input maxlength="18" matInput [formControl]="cnpj" (keyup)="cnpjMask($event)" placeholder="CNPJ" formControlName="cnpj" #cnpjInput/>
+                <mat-error *ngIf="clientForm.get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Data de Nascimento</mat-label>
+            <input maxlength="10" matInput [formControl]="date" (input)="dateMask()" placeholder="dd/mm/aaaa" formControlName="date" #dateInput/>
+            <mat-error *ngIf="clientForm.get('date')?.invalid">{{ getErrorMessage("date") }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" [formControl]="email" #emailInput>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>CEP</mat-label>
+            <input matInput placeholder="00.000-000" #cepInput>
+            <button type="button" mat-icon-button matSuffix (click)="teste(cepInput)">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Endereço</mat-label>
+            <input matInput placeholder="Ex.: Rua dos Bobos" formControlName="address" #addressInput>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Bairro</mat-label>
+            <input matInput placeholder="Ex.: Bairro" formControlName="neighborhood" #neighborhoodInput>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Cidade</mat-label>
+            <input matInput placeholder="Ex.: Cidade" formControlName="city" #cityInput>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>UF</mat-label>
+            <input matInput placeholder="Ex.: Estado" formControlName="state" #stateInput>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </form>
+</div>

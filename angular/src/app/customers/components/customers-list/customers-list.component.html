@@ -1,0 +1,77 @@
+<mat-form-field class="search-bar">
+    <mat-label>Pesquisar</mat-label>
+    <input matInput placeholder="Ex.: Josy" #input (keyup)="applyFilter(input)"/>
+    <button mat-icon-button matSuffix (click)="applyFilter(input)">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell class="center-content" *matHeaderCellDef>Nome</th>
+      <td mat-cell class="center-content" *matCellDef="let element">
+        {{ element.name }}
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell class="center-content" *matHeaderCellDef>Email</th>
+      <td mat-cell class="center-content" *matCellDef="let element">
+        {{ element.email }}
+      </td>
+    </ng-container>
+  
+  
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell class="center-content action-column" *matHeaderCellDef>
+        <button mat-raised-button color="primary" (click)="onAdd()">
+          Cadastrar
+        </button>
+      </th>
+      <td mat-cell class="center-content action-column" *matCellDef="let product">
+        <button
+          mat-icon-button
+          color="basic"
+          aria-label="Ver detalhes"
+          
+        >
+          <mat-icon>info</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Editar cliente"
+          
+        >
+          <mat-icon>edit_square</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          aria-label="Remover cliente"
+          
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        Nenhum cliente encontrado para o filtro "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+  
+  <mat-paginator
+    [pageSizeOptions]="[10, 25, 50, 100]"
+    aria-label="Select page of users"
+  ></mat-paginator>
+  

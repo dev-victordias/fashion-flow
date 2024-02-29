@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>
+  <mat-toolbar color="accent"> Produtos </mat-toolbar>
+</h2>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="example-form">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Nome" formControlName="name" #name />
+      <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Referência</mat-label>
+      <input matInput placeholder="Referência" formControlName="reference" #reference/>
+      <mat-error *ngIf="form.get('reference')?.invalid">{{ getErrorMessage("reference") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Código de Barras</mat-label>
+      <input matInput placeholder="Código de Barras" formControlName="barCode" #barCode/>
+      <mat-error *ngIf="form.get('barCode')?.invalid">{{ getErrorMessage("barCode") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Categoria</mat-label>
+      <mat-select placeholder="Selecione um tipo" formControlName="type" #type>
+        <mat-option *ngFor="let option of typeOptions" [value]="option.value">
+          {{ option.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('type')?.invalid">{{ getErrorMessage("type") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Preço</mat-label>
+      <input matInput placeholder="Preço" formControlName="price" #price (blur)="formatPrice($event)"/>
+      <span matTextPrefix>R$&nbsp;</span>
+      <mat-error *ngIf="form.get('price')?.invalid">{{ getErrorMessage("price") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Quantidade</mat-label>
+      <input matInput placeholder="Quantidade" formControlName="quantity" #quantity />
+      <mat-error *ngIf="form.get('quantity')?.invalid">{{ getErrorMessage("quantity") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Tamanho</mat-label>
+      <mat-select placeholder="Selecione um tipo" formControlName="size" #size>
+        <mat-option *ngFor="let option of sizeOptions" [value]="option.value">
+          {{ option.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('size')?.invalid">{{ getErrorMessage("size") }}</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="accent" (click)="onSubmit()">
+    Salvar
+  </button>
+  <button mat-raised-button color="warn" (click)="onCancel()">
+    Cancelar
+  </button>
+</div>

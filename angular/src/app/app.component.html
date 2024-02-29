@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Fashion Flow</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" aria-hidden="false">logout</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-tab-group (selectedTabChange)="onTabSelected($event)">
+  <mat-tab label="Dashboard"> Dashboard </mat-tab>
+  <mat-tab label="Vendas"> Vendas </mat-tab>
+  <mat-tab label="Estoque"> <app-products></app-products> </mat-tab>
+  <mat-tab label="Clientes"> <app-customers></app-customers> </mat-tab>
+</mat-tab-group>
