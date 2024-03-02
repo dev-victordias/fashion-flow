@@ -27,12 +27,11 @@ export class CustomersNewComponent implements OnInit {
 
   phone = new FormControl('', [Validators.required]);
 
+  email = new FormControl('', [Validators.required, Validators.email]);
+
   date = new FormControl('', [
-    Validators.required,
     this.dateValidator.bind(this),
   ]);
-
-  email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(
     private fb: FormBuilder,
@@ -44,17 +43,21 @@ export class CustomersNewComponent implements OnInit {
     this.clientForm = this.fb.group({
       clientType: ['individual'], // Valor padrão pode ser alterado conforme necessário
       name: ['', Validators.required],
-      cpf: this.cpf,
-      email: this.email,
       phone: this.phone,
+      email: this.email,
       date: this.date,
-      companyName: ['', Validators.required],
+      cpf: this.cpf,
       cnpj: this.cnpj,
+      stateRegistration: ['', Validators.required],
+      corporateReason: ['', Validators.required],
+      fantasyName: ['', Validators.required],
       cep: this.cep,
-      address: '',
-      neighborhood: '',
-      city: '',
-      state: '',
+      address: ['', Validators.required],
+      addressComplement: ['', Validators.required],
+      referencePoint: [''],
+      neighborhood: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
     });
   }
 

@@ -9,39 +9,10 @@
             <mat-radio-button value="company">Pessoa Jurídica</mat-radio-button>
         </mat-radio-group>
 
-        <div *ngIf="clientForm.get('clientType')?.value === 'individual'">
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Nome</mat-label>
-                <input matInput placeholder="Nome" formControlName="name" #nameInput/>
-                <mat-error *ngIf="clientForm.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>CPF</mat-label>
-                <input maxlength="14" matInput [formControl]="cpf" (keyup)="cpfMask($event)" placeholder="CPF" formControlName="cpf" #cpfInput/>
-                <mat-error *ngIf="clientForm.get('cpf')?.invalid">{{ getErrorMessage("cpf") }}</mat-error>
-            </mat-form-field>
-
-        </div>
-        
-        <div *ngIf="clientForm.get('clientType')?.value === 'company'">
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Nome Fantasia</mat-label>
-                <input matInput placeholder="Nome Fantasia" formControlName="companyName" #companyNameInput />
-                <mat-error *ngIf="clientForm.get('companyName')?.invalid">{{ getErrorMessage("companyName") }}</mat-error>
-            </mat-form-field>
-            
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>CNPJ</mat-label>
-                <input maxlength="18" matInput [formControl]="cnpj" (keyup)="cnpjMask($event)" placeholder="CNPJ" formControlName="cnpj" #cnpjInput/>
-                <mat-error *ngIf="clientForm.get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
-            </mat-form-field>
-        </div>
-
         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Data de Nascimento</mat-label>
-            <input maxlength="10" matInput [formControl]="date" (input)="dateMask()" placeholder="dd/mm/aaaa" formControlName="date" #dateInput/>
-            <mat-error *ngIf="clientForm.get('date')?.invalid">{{ getErrorMessage("date") }}</mat-error>
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome" formControlName="name" #nameInput/>
+            <mat-error *ngIf="clientForm.get('name')?.invalid">{{ getErrorMessage("name") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline">
@@ -55,6 +26,53 @@
             <input matInput type="email" [formControl]="email" #emailInput>
         </mat-form-field>
 
+        <div *ngIf="clientForm.get('clientType')?.value === 'individual'">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Data de Nascimento</mat-label>
+                <input maxlength="10" matInput [formControl]="date" (input)="dateMask()" placeholder="dd/mm/aaaa" formControlName="date" #dateInput/>
+                <mat-error *ngIf="clientForm.get('date')?.invalid">{{ getErrorMessage("date") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>CPF</mat-label>
+                <input maxlength="14" matInput [formControl]="cpf" (keyup)="cpfMask($event)" placeholder="CPF" formControlName="cpf" #cpfInput/>
+                <mat-error *ngIf="clientForm.get('cpf')?.invalid">{{ getErrorMessage("cpf") }}</mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div *ngIf="clientForm.get('clientType')?.value === 'company'">
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Data de Fundação</mat-label>
+                <input maxlength="10" matInput [formControl]="date" (input)="dateMask()" placeholder="dd/mm/aaaa" formControlName="date" #dateInput/>
+                <mat-error *ngIf="clientForm.get('date')?.invalid">{{ getErrorMessage("date") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>CNPJ</mat-label>
+                <input maxlength="18" matInput [formControl]="cnpj" (keyup)="cnpjMask($event)" placeholder="CNPJ" formControlName="cnpj" #cnpjInput/>
+                <mat-error *ngIf="clientForm.get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Inscrição Estadual</mat-label>
+                <input matInput placeholder="Inscrição Estadual" formControlName="stateRegistration" #stateRegistrationInput />
+                <mat-error *ngIf="clientForm.get('stateRegistration')?.invalid">{{ getErrorMessage("stateRegistration") }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Razão Social</mat-label>
+                <input matInput placeholder="Razão Social" formControlName="corporateReason" #corporateReasonInput />
+                <mat-error *ngIf="clientForm.get('corporateReason')?.invalid">{{ getErrorMessage("corporateReason") }}</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nome Fantasia</mat-label>
+                <input matInput placeholder="Nome Fantasia" formControlName="fantasyName" #fantasyNameInput />
+                <mat-error *ngIf="clientForm.get('fantasyName')?.invalid">{{ getErrorMessage("fantasyName") }}</mat-error>
+            </mat-form-field>
+        </div>
+
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>CEP</mat-label>
             <input maxlength="9" matInput [formControl]="cep" (keyup)="cepMask($event)" placeholder="00000-000" #cepInput>
@@ -66,21 +84,37 @@
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Endereço</mat-label>
             <input matInput placeholder="Ex.: Rua dos Bobos" formControlName="address" #addressInput>
+            <mat-error *ngIf="clientForm.get('address')?.invalid">{{ getErrorMessage("address") }}</mat-error>
         </mat-form-field>
 
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Complemento</mat-label>
+            <input matInput placeholder="Ex.: apt101" formControlName="addressComplement" #addressComplementInput>
+            <mat-error *ngIf="clientForm.get('addressComplement')?.invalid">{{ getErrorMessage("addressComplement") }}</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Ponto de Referência</mat-label>
+            <input matInput placeholder="Ex.: Próximo ao barbeiro" formControlName="referencePoint" #referencePointInput>
+            <mat-error *ngIf="clientForm.get('referencePoint')?.invalid">{{ getErrorMessage("referencePoint") }}</mat-error>
+        </mat-form-field>
+        
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Bairro</mat-label>
             <input matInput placeholder="Ex.: Bairro" formControlName="neighborhood" #neighborhoodInput>
+            <mat-error *ngIf="clientForm.get('neighborhood')?.invalid">{{ getErrorMessage("neighborhood") }}</mat-error>
         </mat-form-field>
-
+        
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Cidade</mat-label>
-            <input matInput placeholder="Ex.: Cidade" formControlName="city" #cityInput>
+            <input matInput placeholder="Ex.: Vitória" formControlName="city" #cityInput>
+            <mat-error *ngIf="clientForm.get('city')?.invalid">{{ getErrorMessage("city") }}</mat-error>
         </mat-form-field>
-
+        
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>UF</mat-label>
-            <input matInput placeholder="Ex.: Estado" formControlName="state" #stateInput>
+            <input matInput placeholder="Ex.: ES" formControlName="state" #stateInput>
+            <mat-error *ngIf="clientForm.get('state')?.invalid">{{ getErrorMessage("state") }}</mat-error>
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit">Salvar</button>
