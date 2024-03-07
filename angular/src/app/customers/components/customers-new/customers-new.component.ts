@@ -10,6 +10,8 @@ import {
 } from '@angular/forms';
 import { Observer } from 'rxjs';
 import { CustomersService } from '../../services/customers.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-customers-new',
@@ -21,7 +23,7 @@ export class CustomersNewComponent implements OnInit {
 
   cpf = new FormControl('', [Validators.required]);
 
-  cnpj = new FormControl('', [Validators.required]);
+  cnpj = new FormControl('');
 
   cep = new FormControl('', [Validators.required]);
 
@@ -35,8 +37,9 @@ export class CustomersNewComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private datePipe: DatePipe,
-    private service: CustomersService
+    private service: CustomersService,
+    private _snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<CustomersNewComponent>,
   ) {}
 
   ngOnInit(): void {
@@ -48,9 +51,9 @@ export class CustomersNewComponent implements OnInit {
       date: this.date,
       cpf: this.cpf,
       cnpj: this.cnpj,
-      stateRegistration: ['', Validators.required],
-      corporateReason: ['', Validators.required],
-      fantasyName: ['', Validators.required],
+      stateRegistration: [''],
+      corporateReason: [''],
+      fantasyName: [''],
       cep: this.cep,
       address: ['', Validators.required],
       addressComplement: ['', Validators.required],
@@ -62,17 +65,21 @@ export class CustomersNewComponent implements OnInit {
   }
 
   observer: Observer<any> = {
-    next: () => console.log('sucesso'),
-    error: () => console.log('falha'),
-    complete: () => {
-      /* optional complete handling */
-    },
+    next: () => this.onSuccess(),
+    error: () => this.onError('Erro ao salvar cliente!'),
+    complete: () => {/* optional complete handling */ }
   };
 
-  onSubmit() {
-    // Lógica para enviar dados ao servidor
-    console.log(this.clientForm.value);
+  private onSuccess() {
+    this._snackBar.open('Cliente salvo com sucesso!', '', { duration: 3000 });
+    this.dialogRef.close(true);
   }
+
+  private onError(message: string) {
+    this._snackBar.open(message, '', { duration: 3000 });
+  }
+
+  
 
   getErrorMessage(fieldName: string) {
     const field = this.clientForm.get(fieldName);
@@ -199,10 +206,8 @@ export class CustomersNewComponent implements OnInit {
 
   teste(element: HTMLInputElement) {
     let cep = element.value;
-    console.log(cep);
     this.service.searchCep(cep).subscribe(
       (returnCep: any) => {
-        console.log(returnCep);
         this.clientForm.patchValue({
           address: returnCep.logradouro,
           neighborhood: returnCep.bairro,
@@ -214,5 +219,12 @@ export class CustomersNewComponent implements OnInit {
         console.error('Erro na chamada de API', error);
       }
     );
+  }
+
+  onSubmit() {
+    console.log(this.clientForm.valid)
+    if(this.clientForm.valid) {
+      this.service.save(this.clientForm.value).subscribe(this.observer);
+    }
   }
 }

@@ -85,7 +85,7 @@ export class ProductsNewComponent implements OnInit {
 
   observer: Observer<any> = {
     next: () => this.onSuccess(),
-    error: () => this.onError('Erro na conexão com o banco de dados!'),
+    error: () => this.onError('Erro ao salvar produto!'),
     complete: () => {/* optional complete handling */ }
   };
 

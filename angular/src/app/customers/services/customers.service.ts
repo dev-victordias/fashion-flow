@@ -21,6 +21,7 @@ export class CustomersService {
   }
 
   save(record: Partial<Customer>) {
+    console.log(record);
     if (record._id) {
       return this.update(record);
     }
@@ -32,6 +33,7 @@ export class CustomersService {
   }
 
   private create(record: Partial<Customer>) {
+    console.log(record);
     return this.httpClient.post<Customer>(this.API, record).pipe(first());
   }
 
