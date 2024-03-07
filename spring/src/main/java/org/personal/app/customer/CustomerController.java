@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
     private final CustomerService customerService;
+    private final CustomerDTOMapper customerDTOMapper;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, CustomerDTOMapper customerDTOMapper) {
         this.customerService = customerService;
+        this.customerDTOMapper = customerDTOMapper;
     }
 
     @PostMapping
-    public ResponseEntity<Long> registerCustomer(@Valid @RequestBody Customer customer) {
+    public ResponseEntity<Long> registerCustomer(@Valid @RequestBody CustomerDTO customerRequest) {
+        Customer customer = customerDTOMapper.apply(customerRequest);
         customerService.addCustomer(customer);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
