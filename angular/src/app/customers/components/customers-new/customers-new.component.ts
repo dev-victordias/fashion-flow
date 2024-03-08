@@ -226,5 +226,7 @@ export class CustomersNewComponent implements OnInit {
     if(this.clientForm.valid) {
       this.service.save(this.clientForm.value).subscribe(this.observer);
     }
+
+    this.dialogRef.close();
   }
 }

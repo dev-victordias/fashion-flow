@@ -10,11 +10,11 @@ export interface Customer {
   stateRegistration: string;
   corporateReason: string;
   fantasyName: string;
-  /* cep: string;
+  cep: string;
   address: string;
   addressComplement: string;
   referencePoint: string;
   neighborhood: string;
   city: string;
-  state: string; */
+  state: string;
 }
