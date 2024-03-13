@@ -15,11 +15,27 @@
       </td>
     </ng-container>
 
+    <!-- Type Column -->
+    <ng-container matColumnDef="clientType">
+      <th mat-header-cell class="center-content" *matHeaderCellDef>Cliente</th>
+      <td mat-cell class="center-content" *matCellDef="let element">
+        {{ element.clientType }}
+      </td>
+    </ng-container>
+    
     <!-- Email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell class="center-content" *matHeaderCellDef>Email</th>
       <td mat-cell class="center-content" *matCellDef="let element">
         {{ element.email }}
+      </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell class="center-content" *matHeaderCellDef>Contato</th>
+      <td mat-cell class="center-content" *matCellDef="let element">
+        {{ element.phone }}
       </td>
     </ng-container>
   

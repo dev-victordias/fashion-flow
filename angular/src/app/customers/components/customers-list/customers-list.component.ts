@@ -17,6 +17,8 @@ export class CustomersListComponent {
 
   readonly displayedColumns = [
     'name',
+    'clientType',
+    'phone',
     'email',
     'actions'
   ];
@@ -27,6 +29,7 @@ export class CustomersListComponent {
 
   ngOnInit() {
     this.dataSource.data = this.customers;
+    console.log(this.dataSource)
   }
 
   ngAfterViewInit() {
