@@ -80,26 +80,36 @@ public class Main {
 			Customer c = new Customer();
 			c.setName("João Silva");
 			c.setEmail("joao.silva@email.com");
+			c.setClientType("Pessoa Física");
+			c.setPhone("(27) 99999-9999");
 			customerRepository.save(c);
-
+			
 			Customer c2 = new Customer();
 			c2.setName("Ana Oliveira");
 			c2.setEmail("ana.oliveira@email.com");
+			c2.setClientType("Pessoa Física");
+			c2.setPhone("(27) 99999-8888");
 			customerRepository.save(c2);
 
 			Customer c3 = new Customer();
 			c3.setName("Carlos Pereira");
 			c3.setEmail("carlos.pereira@email.com");
+			c3.setClientType("Pessoa Física");
+			c3.setPhone("(27) 99999-7777");
 			customerRepository.save(c3);
 
 			Customer c4 = new Customer();
 			c4.setName("Laura Santos");
 			c4.setEmail("laura.santos@email.com");
+			c4.setClientType("Pessoa Jurídica");
+			c4.setPhone("(27) 3333-6666");
 			customerRepository.save(c4);
 
 			Customer c5 = new Customer();
 			c5.setName("Marcelo Costa");
 			c5.setEmail("marcelo.costa@email.com");
+			c5.setClientType("Pessoa Jurídica");
+			c5.setPhone("(27) 3333-5555");
 			customerRepository.save(c5);
 		};
 	}
