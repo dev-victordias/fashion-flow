@@ -15,11 +15,11 @@
       </td>
     </ng-container>
 
-    <!-- Type Column -->
-    <ng-container matColumnDef="clientType">
-      <th mat-header-cell class="center-content" *matHeaderCellDef>Cliente</th>
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell class="center-content" *matHeaderCellDef>Contato</th>
       <td mat-cell class="center-content" *matCellDef="let element">
-        {{ element.clientType }}
+        {{ element.phone }}
       </td>
     </ng-container>
     
@@ -30,16 +30,15 @@
         {{ element.email }}
       </td>
     </ng-container>
-
-    <!-- Type Column -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell class="center-content" *matHeaderCellDef>Contato</th>
+    
+    <!-- Address Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell class="center-content" *matHeaderCellDef>Endereço</th>
       <td mat-cell class="center-content" *matCellDef="let element">
-        {{ element.phone }}
+        {{ element.address.city + ' - ' + element.address.state}}
       </td>
     </ng-container>
-  
-  
+    
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell class="center-content action-column" *matHeaderCellDef>

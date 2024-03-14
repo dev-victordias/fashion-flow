@@ -17,8 +17,8 @@ export class CustomersListComponent {
 
   readonly displayedColumns = [
     'name',
-    'clientType',
     'phone',
+    'address',
     'email',
     'actions'
   ];
