@@ -23,6 +23,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("_id")
+    @Column(name = "customer_id")
     private Long id;
 
     private String clientType;

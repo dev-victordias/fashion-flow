@@ -4,12 +4,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.personal.app.customer.Address;
 import org.personal.app.customer.AddressRepository;
 import org.personal.app.customer.Customer;
 import org.personal.app.customer.CustomerRepository;
 import org.personal.app.product.Product;
 import org.personal.app.product.ProductRepository;
+import org.personal.app.sale.Sale;
+import org.personal.app.sale.SaleRepository;
 
 @SpringBootApplication
 public class Main {
@@ -151,6 +157,21 @@ public class Main {
 			c5.setClientType("Pessoa Jurídica");
 			c5.setAddress(addressRepository.getReferenceById(5L));
 			customerRepository.save(c5);
+		};
+	}
+
+	@Bean
+	CommandLineRunner initSales(SaleRepository saleRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
+		List<Product> productsList = new ArrayList<>();
+		productsList.add(productRepository.getReferenceById(1L));
+		productsList.add(productRepository.getReferenceById(2L));
+
+		return args -> {
+			saleRepository.deleteAll();
+			Sale s = new Sale();
+			s.setCustomer(customerRepository.getReferenceById(1L));
+			s.setProductsList(<productRepository.getReferenceById(1L),1>);
+			saleRepository.save(s);
 		};
 	}
 }

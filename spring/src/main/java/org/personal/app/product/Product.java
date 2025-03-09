@@ -22,6 +22,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("_id")
+    @Column(name = "product_id")
     private Long id;
 
     @NotBlank(message = "O nome do produto é obrigatório!")
